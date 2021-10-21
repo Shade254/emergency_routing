@@ -1,25 +1,29 @@
 (define (domain exit)
 
-(:requirements :typing :strips :equality)
+(:requirements :typing :action-costs)
 
 (:types object block)
 (:predicates
-    (at ?agent - object ?from - block)
     (adjacent ?from - block ?to - block)
-    (clear ?to)
+    (at ?agent - object ?from - block)
+)
+
+(:functions
+    (road-length ?from ?to - block) - number
+    (total-cost) - number
 )
 
 (:action move
-    :parameters (?agent - object ?from ?to)
+    :parameters (?agent - object ?from - block ?to - block)
     :precondition (and 
         (at ?agent ?from)
         (adjacent ?from ?to)
-        (clear ?to)
-        
+
     )
     :effect (and 
         (not (at ?agent ?from))
         (at ?agent ?to)
+        (increase (total-cost) (road-length ?from ?to))
     )
     )
 )
