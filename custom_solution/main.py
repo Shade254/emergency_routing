@@ -6,4 +6,5 @@ if __name__ == "__main__":
     print(loaded_graph.get_node("exit_a"))
     print(loaded_graph.get_edge("center", "crossroad_2"))
     print(loaded_graph.get_edge("crossroad_1", "crossroad_4"))
+    print(loaded_graph.get_edge("crossroad_4", "crossroad_1"))
     print(loaded_graph.get_out_edges("crossroad_4"))

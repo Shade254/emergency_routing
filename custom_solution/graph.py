@@ -32,27 +32,40 @@ class Node:
 
 
 class Edge:
-    def __init__(self, edge_feature):
-        # infinite capacity
-        self.capacity = ConstantFunction(0)
-        self.risk = ConstantFunction(0)
-        self.from_node = ''
-        self.to_node = ''
-        # constant travel time for the sake of simplicity
-        self.travel_time = 1
+    def __init__(self, from_id, to_id, capacity, risk, travel_time, geometry):
+        self.from_node = from_id
+        self.to_node = to_id
+        self.capacity = capacity
+        self.risk = risk
+        self.travel_time = travel_time
+        self.geometry = geometry
         self.oneway = False
 
+    @staticmethod
+    def create_from_feature(edge_feature):
+        # infinite capacity
+        capacity = ConstantFunction(0)
+        risk = ConstantFunction(0)
+        from_node = ''
+        to_node = ''
+        # constant travel time for the sake of simplicity
+        travel_time = 1
+
         # save Shaply object to this variable
-        self.geometry = None
+        geometry = None
 
         if 'capacity' in edge_feature['properties']:
-            self.capacity = CapacityFunction(edge_feature['properties']['capacity'])
+            capacity = CapacityFunction(edge_feature['properties']['capacity'])
 
         if 'risk' in edge_feature['properties']:
-            self.risk = ConstantFunction(edge_feature['properties']['risk'])
+            risk = ConstantFunction(edge_feature['properties']['risk'])
 
-        self.from_node = edge_feature['properties']['from']
-        self.to_node = edge_feature['properties']['to']
+        from_node = edge_feature['properties']['from']
+        to_node = edge_feature['properties']['to']
+        return Edge(from_node, to_node, capacity, risk, travel_time, geometry)
+
+    def create_opposite(self):
+        return Edge(self.to_node, self.from_node, self.capacity, self.risk, self.travel_time, self.geometry)
 
     def __str__(self):
         str = "Edge %s->%s, capacity=%s, risk=%s, travel_time=%d" % (self.from_node, self.to_node, self.capacity.__str__(), self.risk.__str__(), self.travel_time)
@@ -92,11 +105,11 @@ class Graph:
                         raise ValueError("ID " + node_obj.name + " appeared twice in the graph")
                     self.__node_map[node_obj.name] = node_obj
                 elif i['geometry']['type'] == 'LineString':
-                    edge_obj = Edge(i)
+                    edge_obj = Edge.create_from_feature(i)
                     self.__add_edge_to_graph(edge_obj.from_node, edge_obj.to_node, edge_obj)
                     self.num_of_edges += 1
                     if not edge_obj.oneway:
-                        self.__add_edge_to_graph(edge_obj.to_node, edge_obj.from_node, edge_obj)
+                        self.__add_edge_to_graph(edge_obj.to_node, edge_obj.from_node, edge_obj.create_opposite())
                         self.num_of_edges += 1
                 else:
                     area_obj = Area(i)
