@@ -10,6 +10,9 @@ class ConstantFunction(RiskFunction):
     def get_risk(self, people):
         return self.constant
 
+    def __str__(self):
+        return "{ConstantFunction risk=%d}" % self.constant
+
 
 class CapacityFunction(RiskFunction):
     def __init__(self, capacity):
@@ -24,3 +27,11 @@ class CapacityFunction(RiskFunction):
 
         # cannot send that many people through the corridor
         return None
+
+    def __str__(self):
+        str = "{CapacityFunction["
+        for key in self.capacity:
+            str += "%d->%d, " % (key, self.capacity[key])
+        str = str[:-2]
+        str += "]}"
+        return str
