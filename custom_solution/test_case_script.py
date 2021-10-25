@@ -13,6 +13,10 @@ def remove_properties(feature):
     return feature
 
 
+def create_new_node(name, location):
+    return {"type": "Feature", "properties": {"name": name}, "geometry": {"type": "Point", "coordinates": location}}
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Enter test case file path as program argument")
@@ -49,6 +53,14 @@ if __name__ == "__main__":
                         if first_location == n["geometry"]["coordinates"]:
                             e["properties"]["from"] = n["properties"]["name"]
                             break
+                else:
+                    found = False
+                    for n in nodes:
+                        if n["properties"]["name"] == e["properties"]["from"]:
+                            found = True
+                            break
+                    if not found:
+                        nodes.append(create_new_node(e["properties"]["from"], e["geometry"]["coordinates"][0]))
 
                 if "to" not in e["properties"]:
                     last_location = e["geometry"]["coordinates"][-1]
@@ -56,6 +68,14 @@ if __name__ == "__main__":
                         if last_location == n["geometry"]["coordinates"]:
                             e["properties"]["to"] = n["properties"]["name"]
                             break
+                else:
+                    found = False
+                    for n in nodes:
+                        if n["properties"]["name"] == e["properties"]["to"]:
+                            found = True
+                            break
+                    if not found:
+                        nodes.append(create_new_node(e["properties"]["to"], e["geometry"]["coordinates"][-1]))
 
             for a in areas:
                 remove_properties(a)
