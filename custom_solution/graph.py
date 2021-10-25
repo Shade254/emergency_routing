@@ -1,5 +1,6 @@
 import json
 from risk_functions import *
+from shapely.geometry import Point, Polygon, LineString
 
 
 class Node:
@@ -10,7 +11,7 @@ class Node:
         self.people = 0
 
         # save Shaply object to this variable
-        self.geometry = None
+        self.geometry = Point(node_feature['geometry']['coordinates'])
 
         self.name = node_feature['properties']['name']
 
@@ -22,6 +23,10 @@ class Node:
 
         if 'people' in node_feature['properties']:
             self.people = node_feature['properties']['people']['normal']
+
+    def Distance(self, node): 
+        return self.geometry.distance(node.geometry)
+
 
     def __str__(self):
         str = ""
@@ -51,8 +56,8 @@ class Edge:
         # constant travel time for the sake of simplicity
         travel_time = 1
 
-        # save Shaply object to this variable
-        geometry = None
+        # save Shaply object to this variable --> how to handle the edge_feature with more than 2 coordinates? 
+        geometry = LineString([(edge_feature['geometry']['coordinates'][0]), ((edge_feature['geometry']['coordinates'][1]))])
 
         if 'capacity' in edge_feature['properties']:
             capacity = CapacityFunction(edge_feature['properties']['capacity'])
@@ -81,7 +86,7 @@ class Area:
         self.risk = ConstantFunction(area_feature['properties']['risk'])
 
         # save Shaply object to this variable
-        self.geometry = None
+        self.geometry = Polygon(area_feature['geometry']['coordinates'][0])
 
     def __str__(self):
         str = "Area type=%s, risk=%s" % (self.type, self.risk.__str__())
@@ -145,8 +150,23 @@ class Graph:
 
     def __assert_risk(self, areas, edges, nodes):
         for a in areas:
+            
             # propagate risk from area to nodes and edges that it contains
-            for e in edges:
-                pass
+            for e in edges: 
+                temp_var = self.get_out_edges(e) 
+                for i in temp_var:
+                    if temp_var[i].geometry.intersects(a.geometry) == True:
+                        temp_var[i].risk = ConstantFunction(a.risk.get_risk())
+
+                        #for testing purposes
+                        print(temp_var[i].from_node)
+                        print(temp_var[i].to_node)
+                        print(a.risk.get_risk())
+                        print(" ")
+                    
+              
             for n in nodes:
+                #work in progress
+                #if a.geometry.contains(nodes[n]) == True:
                 pass
+                    
