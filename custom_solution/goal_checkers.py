@@ -12,7 +12,7 @@ class SingleNodeGoalChecker(GoalChecker):
         self.__goal_id = goal_id
 
     def is_goal(self, node):
-        is_goal = node.name == self.__goal_id
+        is_goal = node.get_node_id() == self.__goal_id
         if is_goal:
             self.__finished = True
         return is_goal

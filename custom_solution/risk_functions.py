@@ -21,7 +21,7 @@ class CapacityFunction(RiskFunction):
             self.capacity[int(key)] = capacity[key]
 
     def get_risk(self, people):
-        for key, value in self.capacity:
+        for key, value in self.capacity.items():
             if people < key:
                 return value
 

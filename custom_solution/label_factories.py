@@ -3,60 +3,46 @@ from labels import *
 
 class LabelFactory:
     def __init__(self, graph):
-        self.__graph = graph
+        self._graph = graph
 
     def expand(self, label):
         pass
 
-    def get_start_labels(self, node, people):
+    def get_start_labels(self, node_name, people):
         pass
 
 
 class CostLabelFactory(LabelFactory):
     def __init__(self, graph, cost_function):
         super().__init__(graph)
-        self.__cost_function = cost_function
+        self._cost_function = cost_function
 
     def expand(self, label):
         cost = label.get_cost()
         children = []
-        for e in self.__graph.get_out_edges(label.get_node()):
-            next_node = self.__graph.get_node(e.to_node)
-            new_label = CostLabel(label, next_node, label.get_people(), cost + self.__cost_function.get_risk(label.get_people(), e))
+        for e in self._graph.get_out_edges(label.get_node_id()):
+            new_label = CostLabel(label, e.to_node, label.get_people(), cost + self._cost_function.get_risk(label.get_people(), e))
             children.append(new_label)
         return children
 
-    def get_start_labels(self, node, people):
-        first_label = CostLabel(None, node, people, 0)
-        children = []
-        for e in self.__graph.get_out_edges(node):
-            next_node = self.__graph.get_node(e.to_node)
-            new_label = CostLabel(first_label, next_node, people, self.__cost_function.get_risk(people, e))
-            children.append(new_label)
-        return children
+    def get_start_labels(self, node_id, people):
+        return [CostLabel(None, node_id, people, 0)]
 
 
-class HeuristicCostLabelFactory(LabelFactory):
+class HeuristicCostLabelFactory(CostLabelFactory):
     def __init__(self, graph, cost_function, heuristic):
-        super().__init__(graph)
-        self.__cost_function = cost_function
-        self.__heuristic = heuristic
+        super().__init__(graph, cost_function)
+        self._heuristic = heuristic
 
     def expand(self, label):
-        cost = label.get_cost()
+        cost = label.get_cost_only()
         children = []
-        for e in self.__graph.get_out_edges(label.get_node()):
-            next_node = self.__graph.get_node(e.to_node)
-            new_label = HeuristicCostLabel(label, next_node, label.get_people(), cost + self.__cost_function.get_risk(label.get_people(), e),
-                                           self.__heuristic.get_estimate(next_node))
+        for e in self._graph.get_out_edges(label.get_node_id()):
+            next_node = self._graph.get_node(e.to_node)
+            new_label = HeuristicCostLabel(label, next_node.name, label.get_people(), cost + self._cost_function.get_risk(label.get_people(), e),
+                                           self._heuristic.get_estimate(next_node))
             children.append(new_label)
         return children
 
-    def get_start_labels(self, node, people):
-        first_label = HeuristicCostLabel(None, node, people, 0, self.__heuristic.get_estimate(node))
-        children = []
-        for e in self.__graph.get_out_edges(node):
-            next_node = self.__graph.get_node(e.to_node)
-            new_label = HeuristicCostLabel(first_label, next_node, people, self.__cost_function.get_risk(people, e), self.__heuristic.get_estimate(next_node))
-            children.append(new_label)
-        return children
+    def get_start_labels(self, node_id, people):
+        return [HeuristicCostLabel(None, node_id, people, 0, self._heuristic.get_estimate(self._graph.get_node(node_id)))]
