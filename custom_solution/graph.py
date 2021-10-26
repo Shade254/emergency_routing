@@ -171,5 +171,4 @@ class Graph:
             for n in nodes:
                 if nodes[n].geometry.intersects(a.geometry): 
                     nodes[n].risk = a.risk
-    def test_func(self): 
-        pass
+
