@@ -56,8 +56,13 @@ class Edge:
         # constant travel time for the sake of simplicity
         travel_time = 1
 
-        # save Shaply object to this variable --> how to handle the edge_feature with more than 2 coordinates? 
-        geometry = LineString([(edge_feature['geometry']['coordinates'][0]), ((edge_feature['geometry']['coordinates'][1]))])
+        # save Shaply object to this variable 
+        list_of_tuples = []
+        for a in edge_feature['geometry']['coordinates']:
+            tuple = (a[0], a[1])
+            list_of_tuples.append(tuple) 
+
+        geometry = LineString(list_of_tuples)
 
         if 'capacity' in edge_feature['properties']:
             capacity = CapacityFunction(edge_feature['properties']['capacity'])
@@ -157,6 +162,7 @@ class Graph:
 
                     #for testing purposes
                     if edges[e][b].geometry.intersects(a.geometry):
+                        print("at edge from " + str(edges[e][b].from_node) + " to " + str(edges[e][b].to_node))
                         print("before, the risk was " + str(edges[e][b].risk))
                         edges[e][b].risk = a.risk
                         print("Now the risk is " + str(edges[e][b].risk))
@@ -165,4 +171,5 @@ class Graph:
             for n in nodes:
                 if nodes[n].geometry.intersects(a.geometry): 
                     nodes[n].risk = a.risk
-                
+    def test_func(self): 
+        pass
