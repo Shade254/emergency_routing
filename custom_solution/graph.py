@@ -153,20 +153,16 @@ class Graph:
             
             # propagate risk from area to nodes and edges that it contains
             for e in edges: 
-                temp_var = self.get_out_edges(e) 
-                for i in temp_var:
-                    if temp_var[i].geometry.intersects(a.geometry) == True:
-                        temp_var[i].risk = ConstantFunction(a.risk.get_risk())
+                for b in edges[e]: 
 
-                        #for testing purposes
-                        print(temp_var[i].from_node)
-                        print(temp_var[i].to_node)
-                        print(a.risk.get_risk())
+                    #for testing purposes
+                    if edges[e][b].geometry.intersects(a.geometry):
+                        print("before, the risk was " + str(edges[e][b].risk))
+                        edges[e][b].risk = a.risk
+                        print("Now the risk is " + str(edges[e][b].risk))
                         print(" ")
-                    
-              
+                
             for n in nodes:
-                #work in progress
-                #if a.geometry.contains(nodes[n]) == True:
-                pass
-                    
+                if nodes[n].geometry.intersects(a.geometry): 
+                    nodes[n].risk = a.risk
+                
