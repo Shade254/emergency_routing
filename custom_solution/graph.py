@@ -1,7 +1,7 @@
 import json
 from risk_functions import *
 from shapely.geometry import Point, Polygon, LineString
-
+from utils import gcdist
 
 class Node:
     def __init__(self, node_feature):
@@ -24,8 +24,8 @@ class Node:
         if 'people' in node_feature['properties']:
             self.people = node_feature['properties']['people']['normal']
 
-    def Distance(self, node): 
-        return self.geometry.distance(node.geometry)
+    def distance(self, node): 
+        return gcdist(self.geometry.y, self.geometry.x, node.geometry.y, node.geometry.x)        
 
 
     def __str__(self):
