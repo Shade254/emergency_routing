@@ -148,7 +148,7 @@ class Graph:
 
     def get_out_edges(self, node_id):
         if node_id in self.__edge_map:
-            return self.__edge_map[node_id]
+            return [self.__edge_map[node_id][to] for to in self.__edge_map[node_id]]
         return None
 
     def __assert_risk(self, areas, edges, nodes):
