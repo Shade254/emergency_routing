@@ -1,5 +1,7 @@
 import json
 from risk_functions import *
+from shapely.geometry import Point, Polygon, LineString
+from utils import transform
 
 
 class Node:
@@ -8,10 +10,7 @@ class Node:
         self.is_exit = False
         self.risk = ConstantFunction(0)
         self.people = 0
-
-        # save Shaply object to this variable
-        self.geometry = None
-
+        self.geometry = Point(transform(node_feature['geometry']['coordinates'][1], node_feature['geometry']['coordinates'][0], 2197))
         self.name = node_feature['properties']['name']
 
         if 'is_exit' in node_feature['properties'] and node_feature['properties']['is_exit']:
@@ -22,6 +21,9 @@ class Node:
 
         if 'people' in node_feature['properties']:
             self.people = node_feature['properties']['people']['normal']
+
+    def distance(self, node):
+        return node.geometry.distance(self.geometry)
 
     def __str__(self):
         str = ""
@@ -51,8 +53,11 @@ class Edge:
         # constant travel time for the sake of simplicity
         travel_time = 1
 
-        # save Shaply object to this variable
-        geometry = None
+        projected_coordinates = []
+        for a in edge_feature['geometry']['coordinates']:
+            projected_coordinates.append(transform(a[1], a[0], 2197))
+
+        geometry = LineString(projected_coordinates)
 
         if 'capacity' in edge_feature['properties']:
             capacity = CapacityFunction(edge_feature['properties']['capacity'])
@@ -80,8 +85,10 @@ class Area:
         self.type = area_feature['properties']['type']
         self.risk = ConstantFunction(area_feature['properties']['risk'])
 
-        # save Shaply object to this variable
-        self.geometry = None
+        projected_coords = []
+        for c in area_feature["geometry"]["coordinates"][0]:
+            projected_coords.append(transform(c[1], c[0], 2197))
+        self.geometry = Polygon(projected_coords)
 
     def __str__(self):
         str = "Area type=%s, risk=%s" % (self.type, self.risk.__str__())
@@ -89,13 +96,14 @@ class Area:
 
 
 class Graph:
-    def __init__(self, edge_feature):
+    def __init__(self, path_to_graph):
         self.num_of_edges = 0
         self.__node_map = {}
         self.__edge_map = {}
         self.area_list = []
+        print("Loading graph from file " + path_to_graph)
 
-        with open(edge_feature, 'r') as f:
+        with open(path_to_graph, 'r') as f:
             data = json.load(f)
 
             for i in data['features']:
@@ -145,8 +153,15 @@ class Graph:
 
     def __assert_risk(self, areas, edges, nodes):
         for a in areas:
-            # propagate risk from area to nodes and edges that it contains
+            print("In area of " + a.type + " with risk " + a.risk.__str__())
+
             for e in edges:
-                pass
+                for b in edges[e]:
+                    if edges[e][b].geometry.intersects(a.geometry):
+                        edges[e][b].risk = a.risk
+                        print(e + " -> " + b)
+
             for n in nodes:
-                pass
+                if nodes[n].geometry.intersects(a.geometry):
+                    nodes[n].risk = a.risk
+                    print(n)

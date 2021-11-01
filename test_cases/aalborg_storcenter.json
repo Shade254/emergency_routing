@@ -1,494 +1,1115 @@
 {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "exit_b",
-        "is_exit": true
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.873898029327393,
-          57.005460880067446
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "center",
-        "people": {
-          "normal": 300
-        }
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.874134063720703,
-          57.004794830781535
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "exit_a",
-        "is_exit": "true"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.876081347465513,
-          57.00480067337097
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "crossroad_1"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.87397313117981,
-          57.00525931377874
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "crossroad_2",
-        "people": {
-          "normal": 20,
-          "disabled": 1
-        }
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.874058961868286,
-          57.00499932086595
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "bog_and_ide",
-        "people": {
-          "normal": 20,
-          "disabled": 1
-        }
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.87483948469162,
-          57.004883930170784
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "crossroad_3"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.87483412027359,
-          57.004815279840564
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "crossroad_4",
-        "people": {
-          "normal": 100
-        }
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.875939190387726,
-          57.004806515959494
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "crossroad_5"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.87434059381485,
-          57.00474809003297
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "crossroad_6"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.875488579273224,
-          57.004323038655606
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "crossroad_7"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.874179661273956,
-          57.0046735968436
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "crossroad_8"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.87390339374542,
-          57.004772921062944
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "capacity": {
-          "80": 0,
-          "100": 50,
-          "200": 100
-        },
-        "from": "exit_b",
-        "to": "crossroad_1"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.873898029327393,
-            57.005460880067446
-          ],
-          [
-            9.87397313117981,
-            57.00525931377874
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "capacity": {
-          "100": 0,
-          "200": 20,
-          "400": 60,
-          "600": 100
-        },
-        "from": "crossroad_1",
-        "to": "crossroad_4"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.87397313117981,
-            57.00525931377874
-          ],
-          [
-            9.874257445335388,
-            57.00529144760811
-          ],
-          [
-            9.875043332576752,
-            57.00514246325623
-          ],
-          [
-            9.875182807445526,
-            57.00502269108973
-          ],
-          [
-            9.875365197658539,
-            57.00502269108973
-          ],
-          [
-            9.875939190387726,
-            57.004806515959494
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "crossroad_1",
-        "to": "crossroad_2"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.87397313117981,
-            57.00525931377874
-          ],
-          [
-            9.874058961868286,
-            57.00499932086595
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "crossroad_2",
-        "to": "center"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.874058961868286,
-            57.00499932086595
-          ],
-          [
-            9.874134063720703,
-            57.004794830781535
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "center",
-        "to": "crossroad_3"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.874134063720703,
-            57.004794830781535
-          ],
-          [
-            9.874348640441895,
-            57.0048167404872
-          ],
-          [
-            9.87483412027359,
-            57.004815279840564
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "crossroad_3",
-        "to": "bog_and_ide"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.87483412027359,
-            57.004815279840564
-          ],
-          [
-            9.87483948469162,
-            57.004883930170784
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "crossroad_3",
-        "to": "crossroad_4"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.87483412027359,
-            57.004815279840564
-          ],
-          [
-            9.875939190387726,
-            57.004806515959494
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "crossroad_4",
-        "to": "exit_a"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.875939190387726,
-            57.004806515959494
-          ],
-          [
-            9.876081347465513,
-            57.00480067337097
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "center",
-        "to": "crossroad_5"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.874134063720703,
-            57.004794830781535
-          ],
-          [
-            9.87434059381485,
-            57.00474809003297
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "capacity": {
-          "100": 0,
-          "200": 20,
-          "400": 60,
-          "600": 100
-        },
-        "from": "crossroad_5",
-        "to": "crossroad_6"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.87434059381485,
-            57.00474809003297
-          ],
-          [
-            9.875488579273224,
-            57.004323038655606
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "fire",
-        "risk": 100
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              9.875099658966064,
-              57.005314817648355
-            ],
-            [
-              9.874627590179443,
-              57.00534403017807
-            ],
-            [
-              9.874922633171082,
-              57.005002242144734
-            ],
-            [
-              9.87498164176941,
-              57.00461663136282
-            ],
-            [
-              9.875593185424805,
-              57.00462247398028
-            ],
-            [
-              9.87571656703949,
-              57.004952580374315
-            ],
-            [
-              9.875512719154358,
-              57.0051687546558
-            ],
-            [
-              9.875099658966064,
-              57.005314817648355
+   "type": "FeatureCollection",
+   "features": [
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "exit_b",
+            "is_exit": true
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.873898029327393,
+               57.005460880067446
             ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "fire",
-        "risk": 80
+         }
       },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              9.874568581581116,
-              57.00445741968478
-            ],
-            [
-              9.87482875585556,
-              57.00427191531055
-            ],
-            [
-              9.875115752220154,
-              57.004510003433616
-            ],
-            [
-              9.874721467494965,
-              57.00469112466629
-            ],
-            [
-              9.874568581581116,
-              57.00445741968478
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "center",
+            "people": {
+               "normal": 300
+            }
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.874134063720703,
+               57.004794830781535
             ]
-          ]
-        ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "exit_a",
+            "is_exit": "true"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.876081347465513,
+               57.00480067337097
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_1"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.87397313117981,
+               57.00525931377874
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_2",
+            "people": {
+               "normal": 20,
+               "disabled": 1
+            }
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.874058961868286,
+               57.00499932086595
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "bog_and_ide",
+            "people": {
+               "normal": 20,
+               "disabled": 1
+            }
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.87483948469162,
+               57.004883930170784
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_3"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.87483412027359,
+               57.004815279840564
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_4",
+            "people": {
+               "normal": 100
+            }
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.875939190387726,
+               57.004806515959494
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_5"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.87434059381485,
+               57.00474809003297
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_6"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.875488579273224,
+               57.004323038655606
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_7"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.874174296855927,
+               57.00467286651746
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_8"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.873906075954435,
+               57.00477146041458
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "toilets"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.87366333603859,
+               57.0049606139005
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_13"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.874787181615828,
+               57.00410101676132
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_14"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.8733589053154,
+               57.00471960736053
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_15"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.873073250055313,
+               57.00468747303723
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "paw_sko"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.873336777091026,
+               57.00477839849381
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "smart_eyes"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.87476572394371,
+               57.00415214034123
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "exit_c",
+            "is_exit": "true"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.872610569000244,
+               57.00464073215381
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "nails_gallery"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.873046427965164,
+               57.00474918551994
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "bella_donna"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.873087331652641,
+               57.00464986123721
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_16"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.872807711362839,
+               57.00466118129752
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "big_hall"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.8743137717247,
+               57.00406523021357
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_17"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.874227941036224,
+               57.00427191531055
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "exit_d"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.874096512794495,
+               57.003871690124114
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "crossroad_18"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.874234646558762,
+               57.004203263850926
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "synoptik"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.874347299337387,
+               57.004203629018576
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "name": "change"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               9.87432785332203,
+               57.00427483664643
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "capacity": {
+               "80": 0,
+               "100": 50,
+               "200": 100
+            },
+            "from": "exit_b",
+            "to": "crossroad_1"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.873898029327393,
+                  57.005460880067446
+               ],
+               [
+                  9.87397313117981,
+                  57.00525931377874
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "capacity": {
+               "100": 0,
+               "200": 20,
+               "400": 60,
+               "600": 100
+            },
+            "from": "crossroad_1",
+            "to": "crossroad_4"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.87397313117981,
+                  57.00525931377874
+               ],
+               [
+                  9.874257445335388,
+                  57.00529144760811
+               ],
+               [
+                  9.875043332576752,
+                  57.00514246325623
+               ],
+               [
+                  9.875182807445526,
+                  57.00502269108973
+               ],
+               [
+                  9.875365197658539,
+                  57.00502269108973
+               ],
+               [
+                  9.875939190387726,
+                  57.004806515959494
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_1",
+            "to": "crossroad_2"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.87397313117981,
+                  57.00525931377874
+               ],
+               [
+                  9.874058961868286,
+                  57.00499932086595
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_2",
+            "to": "center"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874058961868286,
+                  57.00499932086595
+               ],
+               [
+                  9.874134063720703,
+                  57.004794830781535
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "center",
+            "to": "crossroad_3"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874134063720703,
+                  57.004794830781535
+               ],
+               [
+                  9.874348640441895,
+                  57.0048167404872
+               ],
+               [
+                  9.87483412027359,
+                  57.004815279840564
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_3",
+            "to": "bog_and_ide"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.87483412027359,
+                  57.004815279840564
+               ],
+               [
+                  9.87483948469162,
+                  57.004883930170784
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_3",
+            "to": "crossroad_4"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.87483412027359,
+                  57.004815279840564
+               ],
+               [
+                  9.875939190387726,
+                  57.004806515959494
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_4",
+            "to": "exit_a"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.875939190387726,
+                  57.004806515959494
+               ],
+               [
+                  9.876081347465513,
+                  57.00480067337097
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "center",
+            "to": "crossroad_5"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874134063720703,
+                  57.004794830781535
+               ],
+               [
+                  9.87434059381485,
+                  57.00474809003297
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "capacity": {
+               "100": 0,
+               "200": 20,
+               "400": 60,
+               "600": 100
+            },
+            "from": "crossroad_5",
+            "to": "crossroad_6"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.87434059381485,
+                  57.00474809003297
+               ],
+               [
+                  9.875488579273224,
+                  57.004323038655606
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_2",
+            "to": "toilets"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874057620763779,
+                  57.004998590546215
+               ],
+               [
+                  9.87366333603859,
+                  57.0049606139005
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "center",
+            "to": "crossroad_8"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874131381511688,
+                  57.00479410045779
+               ],
+               [
+                  9.873906075954435,
+                  57.00477146041458
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "center",
+            "to": "crossroad_7"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874132722616196,
+                  57.00479410045779
+               ],
+               [
+                  9.874174296855927,
+                  57.00467286651746
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_6",
+            "to": "crossroad_13"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.875488579273224,
+                  57.004323038655606
+               ],
+               [
+                  9.8752860724926,
+                  57.00417039874562
+               ],
+               [
+                  9.874787181615828,
+                  57.00410101676132
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_8",
+            "to": "crossroad_14"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.873906075954435,
+                  57.00477146041458
+               ],
+               [
+                  9.8733589053154,
+                  57.00471960736053
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_13",
+            "to": "smart_eyes"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874787181615828,
+                  57.00410101676132
+               ],
+               [
+                  9.87476572394371,
+                  57.00415214034123
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_14",
+            "to": "paw_sko"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.8733589053154,
+                  57.00471960736053
+               ],
+               [
+                  9.873336777091026,
+                  57.00477839849381
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "exit_a",
+            "to": "crossroad_6"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.876081347465513,
+                  57.00480067337097
+               ],
+               [
+                  9.875488579273224,
+                  57.004323038655606
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_14",
+            "to": "crossroad_15"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.8733589053154,
+                  57.00471960736053
+               ],
+               [
+                  9.873073250055313,
+                  57.00468747303723
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_15",
+            "to": "nails_gallery"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.873073250055313,
+                  57.00468747303723
+               ],
+               [
+                  9.873046427965164,
+                  57.00474918551994
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_15",
+            "to": "bella_donna"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.873073250055313,
+                  57.00468747303723
+               ],
+               [
+                  9.873087331652641,
+                  57.00464986123721
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_15",
+            "to": "crossroad_16"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.873073250055313,
+                  57.00468747303723
+               ],
+               [
+                  9.872807711362839,
+                  57.00466118129752
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_13",
+            "to": "big_hall"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874787181615828,
+                  57.00410101676132
+               ],
+               [
+                  9.874449223279953,
+                  57.00405573581758
+               ],
+               [
+                  9.8743137717247,
+                  57.00406523021357
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_16",
+            "to": "exit_c"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.872807711362839,
+                  57.00466118129752
+               ],
+               [
+                  9.872610569000244,
+                  57.00464073215381
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_7",
+            "to": "crossroad_17"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874174296855927,
+                  57.00467286651746
+               ],
+               [
+                  9.874227941036224,
+                  57.00427191531055
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "big_hall",
+            "to": "exit_d"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.8743137717247,
+                  57.00406523021357
+               ],
+               [
+                  9.874096512794495,
+                  57.003871690124114
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "to": "crossroad_18",
+            "from": "big_hall"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.8743137717247,
+                  57.00406523021357
+               ],
+               [
+                  9.874241352081299,
+                  57.00414191563088
+               ],
+               [
+                  9.874234646558762,
+                  57.004203263850926
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "from": "crossroad_17",
+            "to": "crossroad_18"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874227941036224,
+                  57.00427191531055
+               ],
+               [
+                  9.874234646558762,
+                  57.004203263850926
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "to": "synoptik",
+            "from": "crossroad_18"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874234646558762,
+                  57.004203263850926
+               ],
+               [
+                  9.874347299337387,
+                  57.004203629018576
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "to": "change",
+            "from": "crossroad_17"
+         },
+         "geometry": {
+            "type": "LineString",
+            "coordinates": [
+               [
+                  9.874227941036224,
+                  57.00427191531055
+               ],
+               [
+                  9.87432785332203,
+                  57.00427483664643
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "type": "fire",
+            "risk": 100
+         },
+         "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+               [
+                  [
+                     9.875099658966064,
+                     57.005314817648355
+                  ],
+                  [
+                     9.874627590179443,
+                     57.00534403017807
+                  ],
+                  [
+                     9.874922633171082,
+                     57.005002242144734
+                  ],
+                  [
+                     9.87498164176941,
+                     57.00461663136282
+                  ],
+                  [
+                     9.875593185424805,
+                     57.00462247398028
+                  ],
+                  [
+                     9.87571656703949,
+                     57.004952580374315
+                  ],
+                  [
+                     9.875512719154358,
+                     57.0051687546558
+                  ],
+                  [
+                     9.875099658966064,
+                     57.005314817648355
+                  ]
+               ]
+            ]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "type": "fire",
+            "risk": 80
+         },
+         "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+               [
+                  [
+                     9.874568581581116,
+                     57.00445741968478
+                  ],
+                  [
+                     9.87482875585556,
+                     57.00427191531055
+                  ],
+                  [
+                     9.875115752220154,
+                     57.004510003433616
+                  ],
+                  [
+                     9.874721467494965,
+                     57.00469112466629
+                  ],
+                  [
+                     9.874568581581116,
+                     57.00445741968478
+                  ]
+               ]
+            ]
+         }
       }
-    }
-  ]
+   ]
 }
