@@ -46,7 +46,7 @@ class SearchAlgorithm:
                 break
 
             children = self.__label_factory.expand(current_label)
-            print("Number of children: %d" % len(children))
+            # print("Number of children: %d" % len(children))
             for label in children:
                 self._add_to_queue(label)
             self._closed_set.append(current_label.get_node_id())
@@ -133,10 +133,33 @@ class ExitDijkstra(ExitSearchAlg, Dijkstra):
         super().__init__(start_node_name, people, graph, cost_function)
 
 
-# AStar algorithm with single goal
+# AStar algorithm with every exit as a goal
 class ExitAStar(ExitSearchAlg, AStar):
     def __init__(self, start_node_name, people, graph, cost_function, heuristic=None):
         if not heuristic:
             heuristic = ConstantHeuristic(graph, [], 0)
         self._heuristic = heuristic
         super().__init__(start_node_name, people, graph, cost_function)
+
+
+class BulkSearchAlgorithm:
+    def __init__(self, nodes_people_dict, graph, cost_function, heuristic=None):
+        self._starts = nodes_people_dict
+        self._graph = graph
+        self._cost_function = cost_function
+        self._heuristic = heuristic
+
+    def search(self):
+        shortest_paths = []
+        for node, people in self._starts.items():
+            if self._heuristic:
+                algorithm = ExitAStar(node, people, self._graph, self._cost_function, self._heuristic)
+            else:
+                algorithm = ExitDijkstra(node, people, self._graph, self._cost_function)
+
+            paths = algorithm.search()
+            print("%d paths found from %s for %d people" % (len(paths), node, people))
+            for p in paths:
+                print(p)
+            shortest_paths.extend(paths)
+        return shortest_paths

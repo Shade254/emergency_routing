@@ -139,6 +139,14 @@ class Graph:
     def get_all_nodes(self):
         return self.__node_map.keys()
 
+    def get_nodes_with_people(self):
+        node_people_dict = {}
+        for n in self.get_all_nodes():
+            node = self.get_node(n)
+            if node.people > 0:
+                node_people_dict[n] = node.people
+        return node_people_dict
+
     def get_node(self, id):
         if id not in self.__node_map:
             return None
