@@ -6,8 +6,8 @@ class RiskFunction:
 class ConstantFunction(RiskFunction):
     def __init__(self, constant):
         self.constant = constant
-    #deleted 'people' argument, to retrieve the risk in assert_risk method
-    def get_risk(self):
+
+    def get_risk(self, people):
         return self.constant
 
     def __str__(self):

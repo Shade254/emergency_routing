@@ -19,3 +19,18 @@ class SingleNodeGoalChecker(GoalChecker):
 
     def finish_search(self):
         return self.__finished
+
+
+class ExitGoalChecker(GoalChecker):
+    def __init__(self, graph):
+        self.__finished = False
+        self.__graph = graph
+
+    def is_goal(self, node):
+        is_goal = self.__graph.get_node(node.get_node_id()).is_exit
+        if is_goal:
+            self.__finished = True
+        return is_goal
+
+    def finish_search(self):
+        return self.__finished

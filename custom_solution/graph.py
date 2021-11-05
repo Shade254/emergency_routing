@@ -136,6 +136,9 @@ class Graph:
         else:
             raise ValueError('Edge ' + from_id + "->" + to_id + " is already in the graph")
 
+    def get_all_nodes(self):
+        return self.__node_map.keys()
+
     def get_node(self, id):
         if id not in self.__node_map:
             return None

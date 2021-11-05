@@ -11,14 +11,14 @@ if __name__ == "__main__":
     from_node = "exit_a"
     to_node = "exit_b"
     print(" ==== RUNNING DIJKSTRA %s -> %s ====" % (from_node, to_node))
-    dijkstra = SimpleDijkstra("exit_a", 10, "exit_b", graph, EdgeCostFunction())
+    dijkstra = ExitDijkstra("center", 10, graph, EdgeCostFunction())
     paths = dijkstra.search()
     print("Found %d paths" % len(paths))
     for p in paths:
         print(p)
 
     print(" ==== RUNNING A* %s -> %s ====" % (from_node, to_node))
-    a_star = SimpleAStar("exit_a", 10, "exit_b", graph, EdgeCostFunction())
+    a_star = ExitAStar("center", 10, graph, EdgeCostFunction())
     paths = a_star.search()
     print("Found %d paths" % len(paths))
     for p in paths:
