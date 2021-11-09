@@ -59,8 +59,8 @@ class CostLabel(TTlabel):
 
 
 class HeuristicCostLabel(CostLabel):
-    def __init__(self, predecessor, node_id, people, cost, heuristic_estimate):
-        super().__init__(predecessor, node_id, people, cost)
+    def __init__(self, predecessor, node_id, people, travel_time, cost, heuristic_estimate):
+        super().__init__(predecessor, node_id, people, travel_time, cost)
         self._estimate = heuristic_estimate
 
     def get_cost(self):
