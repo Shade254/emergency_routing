@@ -40,9 +40,18 @@ class PeopleLabel(Label):
         return self._people
 
 
-class CostLabel(PeopleLabel):
-    def __init__(self, predecessor, node_id, people, cost):
+class TTlabel(PeopleLabel): 
+    
+    def __init__(self, predecessor, node_id, people, travel_time):
         super().__init__(predecessor, node_id, people)
+        self._travel_time = travel_time
+    
+    def get_travel_time(self): 
+        return self._travel_time
+
+class CostLabel(TTlabel):
+    def __init__(self, predecessor, node_id, people, travel_time, cost):
+        super().__init__(predecessor, node_id, people, travel_time)
         self._cost = cost
 
     def get_cost(self):
