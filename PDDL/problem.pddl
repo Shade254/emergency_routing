@@ -57,9 +57,17 @@
 )
 
 (:goal (and
+    (or
         (at_site agent1 e)
-        (at_site agent2 e)
-        (at_site agent3 e)
+        (at_site agent1 c)
     )
-)
+    (or
+        (at_site agent2 e)
+        (at_site agent2 c)
+    )
+    (or
+        (at_site agent3 e)
+        (at_site agent3 c)
+    )
+))
 )
