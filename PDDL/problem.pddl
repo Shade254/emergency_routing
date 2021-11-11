@@ -1,7 +1,8 @@
 (define (problem enmergency) (:domain exit)
 
 (:objects
-    a b c d e - edges
+    a b c d e - nodes
+    agent1 agent2 agent3 - people
 )
 
 (:init
@@ -30,113 +31,35 @@
     (adjacent d d) 
     (adjacent e e)
 
-    (= (road-risk agent1 a a) 6)
-    (= (road-risk agent2 a a) 6)
-    (= (road-risk agent3 a a) 6)
-    
-    (= (road-crowd agent1 a a) 0)
-    (= (road-crowd agent2 a a) 0)
-    (= (road-crowd agent3 a a) 0)
+    (= (road_cost agent1) 0)
+    (= (road_cost agent2) 0)
+    (= (road_cost agent3) 0)
 
-    (= (road-risk agent1 b b) 6)
-    (= (road-risk agent2 b b) 6)
-    (= (road-risk agent3 b b) 6)
-    
-    (= (road-crowd agent1 b b) 0)
-    (= (road-crowd agent2 b b) 0)
-    (= (road-crowd agent3 b b) 0)
+    (= (road_risk a b) 6)
+    (= (road_risk a d) 1)
+    (= (road_risk b d) 2)
+    (= (road_risk b e) 2)
+    (= (road_risk b c) 5)
+    (= (road_risk c e) 5)
+    (= (road_risk d e) 6)
 
-    (= (road-risk agent1 c c) 6)
-    (= (road-risk agent2 c c) 6)
-    (= (road-risk agent3 c c) 6)
-    
-    (= (road-crowd agent1 d d) 0)
-    (= (road-crowd agent2 d d) 0)
-    (= (road-crowd agent3 d d) 0)
+    (= (road_crowd a b ) 1)
+    (= (road_crowd a d) 1)
+    (= (road_crowd b d) 1)
+    (= (road_crowd b e) 1)
+    (= (road_crowd b c) 1)
+    (= (road_crowd c e) 1)
+    (= (road_crowd d e) 1)
 
-    (= (road-risk agent1 e e) 6)
-    (= (road-risk agent2 e e) 6)
-    (= (road-risk agent3 e e) 6)
-    
-    (= (road-crowd agent1 e e) 0)
-    (= (road-crowd agent2 e e) 0)
-    (= (road-crowd agent3 e e) 0)
-
-    (= (road-risk agent1 a b) 6)
-    (= (road-risk agent2 a b) 6)
-    (= (road-risk agent3 a b) 6)
-    
-    (= (road-crowd agent1 a b) 0)
-    (= (road-crowd agent2 a b) 0)
-    (= (road-crowd agent3 a b) 0)
-
-    (= (road-risk agent1 a d) 1)
-    (= (road-risk agent2 a d) 1)
-    (= (road-risk agent3 a d) 1)
-    
-    (= (road-crowd agent1 a d) 0)
-    (= (road-crowd agent2 a d) 0)
-    (= (road-crowd agent3 a d) 0)
-
-    (= (road-risk agent1 b d) 2)
-    (= (road-risk agent2 b d) 2)
-    (= (road-risk agent3 b d) 2)
-    
-    (= (road-crowd agent1 b d) 0)
-    (= (road-crowd agent2 b d) 0)
-    (= (road-crowd agent3 b d) 0)
-    
-    (= (road-risk agent1 b e) 2)
-    (= (road-risk agent2 b e) 2)
-    (= (road-risk agent3 b e) 2)
-    
-    (= (road-crowd agent1 b e) 0)
-    (= (road-crowd agent2 b e) 0)
-    (= (road-crowd agent3 b e) 0)
-
-    (= (road-risk agent1 b c) 5)
-    (= (road-risk agent2 b c) 5)
-    (= (road-risk agent3 b c) 5)
-    
-    (= (road-crowd agent1 b c) 0)
-    (= (road-crowd agent2 b c) 0)
-    (= (road-crowd agent3 b c) 0)
-
-    (= (road-risk agent1 c e) 5)
-    (= (road-risk agent2 c e) 5)
-    (= (road-risk agent3 c e) 5)
-    
-    (= (road-crowd agent1 c e) 0)
-    (= (road-crowd agent2 c e) 0)
-    (= (road-crowd agent3 c e) 0)
-
-    (= (road-risk agent1 d e) 6)
-    (= (road-risk agent2 d e) 6)
-    (= (road-risk agent3 d e) 6)
-    
-    (= (road-crowd agent1 d e) 0)
-    (= (road-crowd agent2 d e) 0)
-    (= (road-crowd agent3 d e) 0)
-
-    (= (road-cost agent1) 0)   
-    (= (road-cost agent2) 0) 
-    (= (road-cost agent3) 0) 
-    
-    (adjacent a a)
-    (adjacent b b)
-    (adjacent c c)
-    (adjacent d d) 
-    (adjacent e e)
-
-    (at agent1 a)
-    (at agent2 a)
-    (at agent3 a)
+    (at_site agent1 a)
+    (at_site agent2 a)
+    (at_site agent3 a)
 )
 
 (:goal (and
-        (at agent1 e)
-        (at agent2 e)
-        (at agent3 e)
+        (at_site agent1 e)
+        (at_site agent2 e)
+        (at_site agent3 e)
     )
 )
 )
