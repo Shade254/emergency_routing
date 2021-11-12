@@ -11,7 +11,6 @@
     (next-agent ?agent - people ?nagent - people)
     (exit ?from - nodes)
     (at-exit ?agent - people)
-    (last-agent ?agent - people)
 )
 
 (:functions
@@ -22,26 +21,24 @@
 
 (:action move
     :parameters (?agent - people ?from - nodes ?to - nodes ?nagent - people)
-    :precondition (and 
-        (not (last-agent ?agent))
+    :precondition (and
         (available ?agent)
         (at_node ?agent ?from)
         (adjacent ?from ?to)
         (next-agent ?agent ?nagent)
         (not (at-exit ?agent))
     )
-    :effect (and 
+    :effect (and
         (not (at_node ?agent ?from))
         (at_node ?agent ?to)
         (available ?nagent)
         (not (available ?agent))
-        (assign (road_cost) (+ (road_risk ?from ?to) (road_crowd ?from ?to)))           
+        (assign (road_cost) (+ (road_risk ?from ?to) (road_crowd ?from ?to)))
     ))
 
 (:action pass
     :parameters (?agent - people ?nagent - people)
     :precondition (and
-        (not (last-agent ?agent))
         (available ?agent)
         (next-agent ?agent ?nagent)
         (at-exit ?agent)
@@ -54,7 +51,6 @@
 (:action move-from-exit
     :parameters (?agent - people ?from - nodes ?nagent - people)
     :precondition (and
-        (not (last-agent ?agent))
         (available ?agent)
         (at_node ?agent ?from)
         (next-agent ?agent ?nagent)
@@ -66,25 +62,6 @@
         (available ?nagent)
         (not (available ?agent))
         (at-exit ?agent)
-    ))
-
-(:action init
-    :parameters (?agent - people ?from - nodes ?to - nodes ?nagent - people)
-    :precondition (and  
-        (last-agent ?agent)
-        (available ?agent)
-        (at_node ?agent ?from)
-        (adjacent ?from ?to)       
-        (next-agent ?agent ?nagent)
-        (not (exit ?from))
-    )
-    :effect (and 
-        (not (at_node ?agent ?from))
-        (at_node ?agent ?to)
-        (next-agent ?agent ?nagent)
-        (not (available ?agent))
-        (available ?nagent)
-        (assign (road_cost) (+ (road_risk ?from ?to) (road_crowd ?from ?to)))  
     ))
 )
 

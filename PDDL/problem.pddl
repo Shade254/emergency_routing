@@ -11,24 +11,21 @@
     (next-agent agent1 agent2)
     (next-agent agent2 agent3)
     (next-agent agent3 agent1)      
-    (last-agent agent3)
-
 
     (exit e)
-    (exit c)
-    
+
     (adjacent a b) (adjacent b a)
     (adjacent a d) (adjacent d a)
-    (adjacent b d) (adjacent d b) 
+    (adjacent b d) (adjacent d b)
     (adjacent b e) (adjacent e b)
-    (adjacent b c) (adjacent c b) 
+    (adjacent b c) (adjacent c b)
     (adjacent c e) (adjacent e c)
     (adjacent d e) (adjacent e d)
 
     (adjacent a a)
     (adjacent b b)
     (adjacent c c)
-    (adjacent d d) 
+    (adjacent d d)
     (adjacent e e)
 
     (= (road_cost) 0)
@@ -41,7 +38,7 @@
     (= (road_risk c e) 5)
     (= (road_risk d e) 6)
 
-    (= (road_crowd a b ) 1)
+    (= (road_crowd a b) 1)
     (= (road_crowd a d) 1)
     (= (road_crowd b d) 1)
     (= (road_crowd b e) 1)
@@ -49,7 +46,7 @@
     (= (road_crowd c e) 1)
     (= (road_crowd d e) 1)
 
-    (at_node agent1 a)
+    (at_node agent1 c)
     (at_node agent2 a)
     (at_node agent3 a)
 )
