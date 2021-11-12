@@ -5,11 +5,12 @@
 (:types people nodes)
 
 (:predicates
-    (Available ?agent - people)
+    (available ?agent - people)
     (adjacent ?from - nodes ?to - nodes)
-    (at_site ?agent - people ?from - nodes)
+    (at_node ?agent - people ?from - nodes)
     (next-agent ?agent - people ?nagent - people)
-    (destination ?agent - people ?from - nodes)
+    (exit ?from - nodes)
+    (at-exit ?agent - people)
     (last-agent ?agent - people)
 )
 
@@ -23,36 +24,66 @@
     :parameters (?agent - people ?from - nodes ?to - nodes ?nagent - people)
     :precondition (and 
         (not (last-agent ?agent))
-        (Available ?agent)
-        (at_site ?agent ?from)
+        (available ?agent)
+        (at_node ?agent ?from)
         (adjacent ?from ?to)
         (next-agent ?agent ?nagent)
-        (not (destination ?agent ?from))
+        (not (at-exit ?agent))
     )
     :effect (and 
-        (not (at_site ?agent ?from))
-        (at_site ?agent ?to)
-        (Available ?nagent)
-        (not (Available ?agent))
+        (not (at_node ?agent ?from))
+        (at_node ?agent ?to)
+        (available ?nagent)
+        (not (available ?agent))
         (assign (road_cost) (+ (road_risk ?from ?to) (road_crowd ?from ?to)))           
+    ))
+
+(:action pass
+    :parameters (?agent - people ?nagent - people)
+    :precondition (and
+        (not (last-agent ?agent))
+        (available ?agent)
+        (next-agent ?agent ?nagent)
+        (at-exit ?agent)
+    )
+    :effect (and
+        (available ?nagent)
+        (not (available ?agent))
+            ))
+
+(:action move-from-exit
+    :parameters (?agent - people ?from - nodes ?nagent - people)
+    :precondition (and
+        (not (last-agent ?agent))
+        (available ?agent)
+        (at_node ?agent ?from)
+        (next-agent ?agent ?nagent)
+        (exit ?from)
+        (not (at-exit ?agent))
+    )
+    :effect (and
+        (not (at_node ?agent ?from))
+        (available ?nagent)
+        (not (available ?agent))
+        (at-exit ?agent)
     ))
 
 (:action init
     :parameters (?agent - people ?from - nodes ?to - nodes ?nagent - people)
     :precondition (and  
         (last-agent ?agent)
-        (Available ?agent)
-        (at_site ?agent ?from)
+        (available ?agent)
+        (at_node ?agent ?from)
         (adjacent ?from ?to)       
         (next-agent ?agent ?nagent)
-        (not (destination ?agent ?from))
+        (not (exit ?from))
     )
     :effect (and 
-        (not (at_site ?agent ?from))
-        (at_site ?agent ?to)
+        (not (at_node ?agent ?from))
+        (at_node ?agent ?to)
         (next-agent ?agent ?nagent)
-        (not (Available ?agent))
-        (Available ?nagent)
+        (not (available ?agent))
+        (available ?nagent)
         (assign (road_cost) (+ (road_risk ?from ?to) (road_crowd ?from ?to)))  
     ))
 )

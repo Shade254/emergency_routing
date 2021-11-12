@@ -6,16 +6,16 @@
 )
 
 (:init
-    (Available agent1)
+    (available agent1)
 
     (next-agent agent1 agent2)
     (next-agent agent2 agent3)
     (next-agent agent3 agent1)      
     (last-agent agent3)
 
-    (destination agent1 e)
-    (destination agent2 e)
-    (destination agent3 e)
+
+    (exit e)
+    (exit c)
     
     (adjacent a b) (adjacent b a)
     (adjacent a d) (adjacent d a)
@@ -49,24 +49,15 @@
     (= (road_crowd c e) 1)
     (= (road_crowd d e) 1)
 
-    (at_site agent1 a)
-    (at_site agent2 a)
-    (at_site agent3 a)
+    (at_node agent1 a)
+    (at_node agent2 a)
+    (at_node agent3 a)
 )
 
 (:goal (and
-    (or
-        (at_site agent1 e)
-        (at_site agent1 c)
-    )
-    (or
-        (at_site agent2 e)
-        (at_site agent2 c)
-    )
-    (or
-        (at_site agent3 e)
-        (at_site agent3 c)
-    )
+    (at-exit agent1)
+    (at-exit agent2)
+    (at-exit agent3)
 ))
-(:metric minimize (road_cost_all))
+(:metric minimize (road_cost))
 )
