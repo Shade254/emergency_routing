@@ -40,9 +40,19 @@ class PeopleLabel(Label):
         return self._people
 
 
-class CostLabel(PeopleLabel):
-    def __init__(self, predecessor, node_id, people, cost):
+class TTLabel(PeopleLabel):
+
+    def __init__(self, predecessor, node_id, people, travel_time):
         super().__init__(predecessor, node_id, people)
+        self._travel_time = travel_time
+
+    def get_travel_time(self):
+        return self._travel_time
+
+
+class CostLabel(TTLabel):
+    def __init__(self, predecessor, node_id, people, travel_time, cost):
+        super().__init__(predecessor, node_id, people, travel_time)
         self._cost = cost
 
     def get_cost(self):
@@ -50,8 +60,8 @@ class CostLabel(PeopleLabel):
 
 
 class HeuristicCostLabel(CostLabel):
-    def __init__(self, predecessor, node_id, people, cost, heuristic_estimate):
-        super().__init__(predecessor, node_id, people, cost)
+    def __init__(self, predecessor, node_id, people, travel_time, cost, heuristic_estimate):
+        super().__init__(predecessor, node_id, people, travel_time, cost)
         self._estimate = heuristic_estimate
 
     def get_cost(self):
