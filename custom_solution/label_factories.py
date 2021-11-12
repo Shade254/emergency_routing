@@ -28,7 +28,7 @@ class CostLabelFactory(LabelFactory):
         return children
 
     def get_start_labels(self, node_id, people):
-        return [CostLabel(None, node_id, people, 0)]
+        return [CostLabel(None, node_id, people, 0, 0)]
 
 
 class HeuristicCostLabelFactory(CostLabelFactory):
@@ -49,4 +49,4 @@ class HeuristicCostLabelFactory(CostLabelFactory):
         return children
 
     def get_start_labels(self, node_id, people):
-        return [HeuristicCostLabel(None, node_id, people, 0, self._heuristic.get_estimate(self._graph.get_node(node_id)))]
+        return [HeuristicCostLabel(None, node_id, people, 0, 0, self._heuristic.get_estimate(self._graph.get_node(node_id)))]
