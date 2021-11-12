@@ -31,9 +31,7 @@
     (adjacent d d) 
     (adjacent e e)
 
-    (= (road_cost agent1) 0)
-    (= (road_cost agent2) 0)
-    (= (road_cost agent3) 0)
+    (= (road_cost) 0)
 
     (= (road_risk a b) 6)
     (= (road_risk a d) 1)
@@ -70,4 +68,5 @@
         (at_site agent3 c)
     )
 ))
+(:metric minimize (road_cost_all))
 )

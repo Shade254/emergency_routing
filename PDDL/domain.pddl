@@ -1,6 +1,6 @@
 (define (domain exit)
 
-(:requirements :typing :negative-preconditions :action-costs)
+(:requirements :typing :negative-preconditions)
 
 (:types people nodes)
 
@@ -16,7 +16,7 @@
 (:functions
     (road_crowd ?from - nodes ?to - nodes) - number
     (road_risk ?from - nodes ?to - nodes) - number
-    (road_cost ?agent - people) - number
+    (road_cost) - number
 )
 
 (:action move
@@ -34,7 +34,7 @@
         (at_site ?agent ?to)
         (Available ?nagent)
         (not (Available ?agent))
-        (assign (road_cost ?agent) (+ (road_risk ?from ?to) (road_crowd ?from ?to)))           
+        (assign (road_cost) (+ (road_risk ?from ?to) (road_crowd ?from ?to)))           
     ))
 
 (:action init
@@ -53,7 +53,7 @@
         (next-agent ?agent ?nagent)
         (not (Available ?agent))
         (Available ?nagent)
-        (assign (road_cost ?agent) (+ (road_risk ?from ?to) (road_crowd ?from ?to)))  
+        (assign (road_cost) (+ (road_risk ?from ?to) (road_crowd ?from ?to)))  
     ))
 )
 
