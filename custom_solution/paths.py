@@ -30,3 +30,9 @@ class SimplePath(Path):
 
     def __str__(self):
         return "PATH: %s, COST: %d" % (self._path, self._cost)
+
+    def __eq__(self, other):
+        return isinstance(other, SimplePath) and self.__hash__() == other.__hash__()
+
+    def __hash__(self):
+        return hash((self._cost, tuple(self._timing), tuple(self._path)))

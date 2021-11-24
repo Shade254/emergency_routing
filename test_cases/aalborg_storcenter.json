@@ -202,7 +202,8 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "crossroad_14"
+            "name": "crossroad_14",
+            "people": {"normal": 100}
          },
          "geometry": {
             "type": "Point",
@@ -268,7 +269,8 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "nails_gallery"
+            "name": "nails_gallery",
+            "people": {"normal": 100}
          },
          "geometry": {
             "type": "Point",
@@ -281,7 +283,8 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "bella_donna"
+            "name": "bella_donna",
+            "people": {"normal": 100}
          },
          "geometry": {
             "type": "Point",

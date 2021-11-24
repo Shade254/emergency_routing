@@ -23,7 +23,7 @@ class CostLabelFactory(LabelFactory):
         for e in self._graph.get_out_edges(label.get_node_id()):
             edge_cost = self._cost_function.get_risk(label.get_people(), e)
             if edge_cost:
-                new_label = CostLabel(label, e.to_node, label.get_people(), label._travel_time + e.travel_time, cost + edge_cost)
+                new_label = CostLabel(label, e.to_node, label.get_people(), label.get_travel_time() + e.travel_time, cost + edge_cost)
                 children.append(new_label)
         return children
 
@@ -43,7 +43,7 @@ class HeuristicCostLabelFactory(CostLabelFactory):
             next_node = self._graph.get_node(e.to_node)
             edge_cost = self._cost_function.get_risk(label.get_people(), e)
             if edge_cost:
-                new_label = HeuristicCostLabel(label, next_node.name, label.get_people(), label._travel_time + e.travel_time, cost + edge_cost,
+                new_label = HeuristicCostLabel(label, next_node.name, label.get_people(), label.get_travel_time() + e.travel_time, cost + edge_cost,
                                                self._heuristic.get_estimate(next_node))
                 children.append(new_label)
         return children
