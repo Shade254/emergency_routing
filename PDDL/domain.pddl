@@ -1,6 +1,6 @@
 (define (domain exit)
 
-(:requirements :typing :negative-preconditions)
+(:requirements :strips :typing :negative-preconditions :fluents)
 
 (:types people nodes modes edges)
 
@@ -21,7 +21,6 @@
 )
 
 (:functions
-    (road_crowd ?from - nodes ?to - nodes) - number
     (road_risk ?through - edges) - number
     (road_cost) - number
     (counter ?through - edges) - number
@@ -51,21 +50,40 @@
         (at-exit ?agent)
     ))
 
-(:action end-of-round
+(:action end-of-round1
     :parameters (?agent - people ?nagent - people ?m1 - modes ?m2 - modes)
     :precondition (and
         (available ?agent)
         (last-agent ?agent)
         (first-agent ?nagent)
-        (mode ?m1)
-        (not (mode ?m2))
-    )
+        (mode ?m1)(to-mode ?m1)(from-mode ?m2)
+        )
     :effect (and
         (not (available ?agent))
         (available ?nagent)
         (mode ?m2)
         (not (mode ?m1))
     ))
+
+(:action end-of-round2
+    :parameters (?agent - people ?nagent - people ?m1 - modes ?m2 - modes)
+    :precondition (and
+        (available ?agent)
+        (last-agent ?agent)
+        (first-agent ?nagent)
+        (mode ?m1)(from-mode ?m1)(to-mode ?m2)
+        )
+    :effect (and
+                (not (available ?agent))
+                (available ?nagent)
+                (mode ?m2)
+                (not (mode ?m1))
+                (forall (?e - edges)
+                   (when (> (counter ?e) 0)
+                        (assign (counter ?e) 0))
+                )
+            )
+)
 
 
 (:action move-to-edge
@@ -85,9 +103,10 @@
         (at_edge ?agent ?to)
         (available ?nagent)
         (not (available ?agent))
-        (assign (road_cost) (road_risk ?to))
-        (assign (counter ?to) 1)
+        (increase (road_cost) (road_risk ?to))
+        (increase (counter ?to) 1)
     ))
+
 
 (:action move-from-edge
     :parameters (?agent - people ?from - edges ?to - nodes ?nagent - people ?m - modes)
@@ -106,9 +125,7 @@
         (at_node ?agent ?to)
         (available ?nagent)
         (not (available ?agent))
-        (assign (counter ?from) -1)
     ))
-)
 )
 
 

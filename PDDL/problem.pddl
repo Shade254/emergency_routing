@@ -75,6 +75,7 @@
     (at-exit agent1)
     (at-exit agent2)
     (at-exit agent3)
+    (forall (?e - edges) (= (counter ?e) 0))
 ))
 (:metric minimize (road_cost))
 )
