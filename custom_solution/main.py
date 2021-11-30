@@ -14,8 +14,28 @@ if __name__ == "__main__":
     for p in shortest_paths:
         print(p)
 
-    collisions = identify_all_collisions(shortest_paths)
+    collisions = identify_all_collisions(shortest_paths, graph)
     collisions = merge_collision(collisions)
 
+
+
+    """
     for m in collisions:
         print(m)
+
+
+    """
+    print("---------------------------------")
+    
+
+
+    new_constraint = collisions[0].get_constraint(0) 
+    print(new_constraint.return_people())
+
+
+    
+
+
+
+
+

@@ -9,6 +9,7 @@ class Path:
 class SimplePath(Path):
     def _reconstruct_path(self, label):
         self._cost = label.get_cost()
+        self.people = label.get_people()
         self._path = []
         self._timing = []
         cur_label = label
@@ -21,6 +22,9 @@ class SimplePath(Path):
 
     def get_timing(self):
         return self._timing
+
+    def get_people(self): 
+        return self.people
 
     def get_path(self):
         return self._path
