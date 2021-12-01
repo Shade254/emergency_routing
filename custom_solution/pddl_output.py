@@ -27,12 +27,12 @@ def output_to_pddl(graph, path="problem.pddl"):
 
     for k, v in people_nodes.items():
         for i in range(v):
-            agent = k + str(i)
+            agent = k + "_" + str(i)
             all_agents.append(agent)
             pddl_string += agent + " "
 
     pddl_string += "virtual "
-    pddl_string += " - agents\n"
+    pddl_string += " - people\n"
     pddl_string += "to from - modes\n"
     pddl_string += ")\n\n"
     pddl_string += "(:init\n"
@@ -77,7 +77,7 @@ def output_to_pddl(graph, path="problem.pddl"):
 
     for k, v in people_nodes.items():
         for i in range(v):
-            agent = k + str(i)
+            agent = k + "_" + str(i)
             pddl_string += "(at_node %s %s)\n" % (agent, k)
 
     for n in all_nodes:
