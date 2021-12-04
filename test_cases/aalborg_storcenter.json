@@ -20,7 +20,7 @@
          "properties": {
             "name": "center",
             "people": {
-               "normal": 30
+               "normal": 5
             }
          },
          "geometry": {
@@ -63,7 +63,7 @@
          "properties": {
             "name": "crossroad_2",
             "people": {
-               "normal": 20,
+               "normal": 2,
                "disabled": 1
             }
          },
@@ -80,7 +80,7 @@
          "properties": {
             "name": "bog_and_ide",
             "people": {
-               "normal": 20,
+               "normal": 2,
                "disabled": 1
             }
          },
@@ -110,7 +110,7 @@
          "properties": {
             "name": "crossroad_4",
             "people": {
-               "normal": 10
+               "normal": 1
             }
          },
          "geometry": {
@@ -203,7 +203,7 @@
          "type": "Feature",
          "properties": {
             "name": "crossroad_14",
-            "people": {"normal": 10}
+            "people": {"normal": 1}
          },
          "geometry": {
             "type": "Point",
@@ -270,7 +270,7 @@
          "type": "Feature",
          "properties": {
             "name": "nails_gallery",
-            "people": {"normal": 10}
+            "people": {"normal": 1}
          },
          "geometry": {
             "type": "Point",
@@ -284,7 +284,7 @@
          "type": "Feature",
          "properties": {
             "name": "bella_donna",
-            "people": {"normal": 10}
+            "people": {"normal": 1}
          },
          "geometry": {
             "type": "Point",
@@ -336,7 +336,8 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "exit_d"
+            "name": "exit_d",
+            "is_exit": true
          },
          "geometry": {
             "type": "Point",

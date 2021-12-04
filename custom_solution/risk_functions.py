@@ -5,6 +5,11 @@ class RiskFunction:
 
 class ConstantFunction(RiskFunction):
     def __init__(self, constant):
+
+        # edge costs should be non zero
+        if constant == 0:
+            constant = 1
+
         self.constant = constant
 
     def get_risk(self, people):
@@ -18,7 +23,12 @@ class CapacityFunction(RiskFunction):
     def __init__(self, capacity):
         self.capacity = {}
         for key in capacity:
-            self.capacity[int(key)] = capacity[key]
+
+            # edge costs should be non zero
+            if capacity[key] == 0:
+                self.capacity[int(key)] = 1
+            else:
+                self.capacity[int(key)] = capacity[key]
 
     def get_risk(self, people):
         for key, value in self.capacity.items():

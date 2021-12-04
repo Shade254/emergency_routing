@@ -1,7 +1,7 @@
 class EdgeCostFunction:
-    def get_risk(self, people, edge):
-        if edge.risk.get_risk(people) == None or edge.capacity.get_risk(people) == None:
+    @staticmethod
+    def get_risk(people, edge):
+        if not edge.risk.get_risk(people) or not edge.capacity.get_risk(people):
             return None
         base_cost = ((edge.risk.get_risk(people) + edge.capacity.get_risk(people)) * edge.travel_time)
-        # edge costs should be non zero
-        return base_cost + 1
+        return base_cost
