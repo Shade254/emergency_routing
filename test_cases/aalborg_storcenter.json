@@ -20,7 +20,7 @@
          "properties": {
             "name": "center",
             "people": {
-               "normal": 300
+               "normal": 30
             }
          },
          "geometry": {
@@ -110,7 +110,7 @@
          "properties": {
             "name": "crossroad_4",
             "people": {
-               "normal": 100
+               "normal": 10
             }
          },
          "geometry": {
@@ -203,7 +203,7 @@
          "type": "Feature",
          "properties": {
             "name": "crossroad_14",
-            "people": {"normal": 100}
+            "people": {"normal": 10}
          },
          "geometry": {
             "type": "Point",
@@ -270,7 +270,7 @@
          "type": "Feature",
          "properties": {
             "name": "nails_gallery",
-            "people": {"normal": 100}
+            "people": {"normal": 10}
          },
          "geometry": {
             "type": "Point",
@@ -284,7 +284,7 @@
          "type": "Feature",
          "properties": {
             "name": "bella_donna",
-            "people": {"normal": 100}
+            "people": {"normal": 10}
          },
          "geometry": {
             "type": "Point",

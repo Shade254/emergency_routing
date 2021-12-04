@@ -76,6 +76,9 @@ class Edge:
         str = "Edge %s->%s, capacity=%s, risk=%s, travel_time=%d" % (self.from_node, self.to_node, self.capacity.__str__(), self.risk.__str__(), self.travel_time)
         return str
 
+    def __hash__(self):
+        return hash((self.from_node, self.to_node))
+
 
 class Area:
     def __init__(self, area_feature):
@@ -161,6 +164,12 @@ class Graph:
         if node_id in self.__edge_map:
             return [self.__edge_map[node_id][to] for to in self.__edge_map[node_id]]
         return None
+
+    def get_all_edges(self):
+        all_edges = []
+        for f in self.get_all_nodes():
+            all_edges.extend(self.get_out_edges(f))
+        return all_edges
 
     def __assert_risk(self, areas, edges, nodes):
         for a in areas:
