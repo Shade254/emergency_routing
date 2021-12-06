@@ -50,11 +50,15 @@ class ConstrainedCostLabelFactory(CostLabelFactory):
             constraints = self.constraints[time]
 
         for e in self._graph.get_out_edges(label.get_node_id()):
-
+            add = True 
             for c in constraints:
                 if c.edge == e:
-                    pass
-                    # apply constraint
+                    add = False
+                    break
+            
+            if not add: 
+                print("Applied constrained " + str(label) + "  --  " +str(e))
+                continue
 
             edge_cost = self._cost_function.get_risk(label.get_people(), e)
             if edge_cost:

@@ -1,3 +1,6 @@
+from numpy import where
+
+
 def merge_collision(collisions):
     merged_collisions = []
     for i in range(len(collisions)):
@@ -54,6 +57,9 @@ class Constraint:
 
     def return_people(self):
         return self.people
+    
+    def __str__(self):
+        return "%s at %d with %d people"%(self.edge, self.when, self.people)
 
 
 class Collision:

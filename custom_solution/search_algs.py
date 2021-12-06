@@ -132,6 +132,16 @@ class ExitDijkstra(ExitSearchAlg, Dijkstra):
     def __init__(self, start_node_name, people, graph, cost_function):
         super().__init__(start_node_name, people, graph, cost_function)
 
+# constrained Dijkstra algorithm with every exit as a goal
+class ConstrainedExitDijkstra(ExitSearchAlg, Dijkstra):
+    def __init__(self, start_node_name, people, graph, cost_function, constraints):
+        self.constraints = constraints
+        super().__init__(start_node_name, people, graph, cost_function)
+    
+    def _create_label_factory(self, graph, cost_function):
+        return ConstrainedCostLabelFactory(graph, cost_function, self.constraints)
+
+
 
 # AStar algorithm with every exit as a goal
 class ExitAStar(ExitSearchAlg, AStar):

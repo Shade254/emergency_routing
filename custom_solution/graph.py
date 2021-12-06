@@ -124,6 +124,9 @@ class Graph:
             print("Loaded %d nodes, %d edges and %d areas" % (len(self.__node_map), self.num_of_edges, len(self.area_list)))
             print("Propagating risk from areas to nodes and edges")
             self.__assert_risk(self.area_list, self.__edge_map, self.__node_map)
+            for node_id in self.__node_map: 
+                self.__edge_map[node_id][node_id] = Edge(node_id, node_id, ConstantFunction(0), self.__node_map[node_id].risk, 1, self.__node_map[node_id].geometry)
+       
 
     def __add_edge_to_graph(self, from_id, to_id, edge):
         if from_id not in self.__edge_map:
