@@ -3,6 +3,7 @@ import json
 
 
 def extract_xml(filename):
+    a = []
     originalTree = et.parse(filename)
     originalNode = originalTree.getroot()
     root = et.Element(originalNode.tag)
@@ -23,12 +24,15 @@ def extract_xml(filename):
                     for key, value in child1.attrib.items():
                         if key == 'ref':
                             ndChild.set(key, value)
+                            a.append(value)
     tree = et.ElementTree(root)
     tree.write('temp.xml')
     nodeTree = et.parse('temp.xml')
     nodeRoot = nodeTree.getroot()
     root2 = et.Element(nodeRoot.tag)
     for node in nodeRoot.findall('node'):
+        if node.attrib['id'] not in a:
+            nodeRoot.remove(node)
         for way in nodeRoot.findall('way'):
             for nd in way.findall('nd'):
                 if nd.attrib['ref'] == node.attrib['id']:
@@ -48,12 +52,12 @@ def xml_to_json(filename):
         coor = []
         if nodeChild.tag == 'node':
             singlearray = {"type": "Feature", "properties": {"name": nodeChild.attrib['id']},
-                           "geometry": {"type": "Point", "coordinates": [nodeChild.attrib['lat'],
-                                                                         nodeChild.attrib['lon']]}}
+                           "geometry": {"type": "Point", "coordinates": [float(nodeChild.attrib['lat']),
+                                                                         float(nodeChild.attrib['lon'])]}}
             list.append(singlearray)
         if nodeChild.tag == 'way':
             for ndChild in nodeChild:
-                coor.append([ndChild.attrib['lat'], ndChild.attrib['lon']])
+                coor.append([float(ndChild.attrib['lat']), float(ndChild.attrib['lon'])])
                 if i == 0:
                     firstNd = ndChild.attrib['id']
                 if i == len(nodeChild) - 1:
@@ -69,3 +73,5 @@ def xml_to_json(filename):
     with open("map.json", 'w') as f:
         f.write(json.dumps(building, indent=4))
     return
+
+xml_to_json(extract_xml('map(3).osm'))
