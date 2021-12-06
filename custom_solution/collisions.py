@@ -1,4 +1,3 @@
-
 def merge_collision(collisions):
     merged_collisions = []
     for i in range(len(collisions)):
@@ -25,7 +24,8 @@ def merge_collision(collisions):
     return merged_collisions
 
 
-def identify_all_collisions(shortest_paths):
+# added graph input to get it to run
+def identify_all_collisions(shortest_paths, graph):
     collisions = []
 
     for i in range(len(shortest_paths)):
@@ -46,11 +46,22 @@ def identify_all_collisions(shortest_paths):
     return collisions
 
 
+class Constraint:
+    def __init__(self, edge, when, people):
+        self.edge = edge
+        self.when = when
+        self.people = people
+
+    def return_people(self):
+        return self.people
+
+
 class Collision:
     def __init__(self, path1, path2, edge, when):
         self.edge = edge
         self.when = when
         self.paths = {path1, path2}
+        self.constraints = []
 
     def can_merge(self, collision):
         return self.edge == collision.edge and self.when == collision.when
@@ -58,6 +69,23 @@ class Collision:
     def merge(self, collision):
         if self.can_merge(collision):
             self.paths = self.paths.union(collision.paths)
+
+    def get_constraint(self, path_index):
+        counter = 0
+        sum_of_people = 0
+
+        for i in self.paths:
+            if counter != path_index:
+                sum_of_people += i.get_people()
+            counter += 1
+
+        return Constraint(self.edge, self.when, sum_of_people)
+
+    def get_all_constraints(self):
+        constraints = []
+        for i in range(len(self.paths)):
+            constraints.append(self.get_constraint(i))
+        return constraints
 
     def __str__(self):
         return "Collision at edge %s at time %d number of paths %d" % (self.edge, self.when, len(self.paths))
