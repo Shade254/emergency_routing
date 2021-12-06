@@ -8,7 +8,7 @@ class Node:
     def __init__(self, node_feature):
         self.name = ''
         self.is_exit = False
-        self.risk = ConstantFunction(0)
+        self.risk = ConstantFunction(1)
         self.people = 0
         self.geometry = Point(transform(node_feature['geometry']['coordinates'][1], node_feature['geometry']['coordinates'][0], 2197))
         self.name = node_feature['properties']['name']
@@ -46,8 +46,8 @@ class Edge:
     @staticmethod
     def create_from_feature(edge_feature):
         # infinite capacity
-        capacity = ConstantFunction(0)
-        risk = ConstantFunction(0)
+        capacity = ConstantFunction(1)
+        risk = ConstantFunction(1)
         from_node = ''
         to_node = ''
         # constant travel time for the sake of simplicity
@@ -73,8 +73,7 @@ class Edge:
         return Edge(self.to_node, self.from_node, self.capacity, self.risk, self.travel_time, self.geometry)
 
     def __str__(self):
-        str = "Edge %s->%s, capacity=%s, risk=%s, travel_time=%d" % (self.from_node, self.to_node, self.capacity.__str__(), self.risk.__str__(), self.travel_time)
-        return str
+        return "Edge %s->%s, capacity=%s, risk=%s, travel_time=%d" % (self.from_node, self.to_node, self.capacity.__str__(), self.risk.__str__(), self.travel_time)
 
     def __hash__(self):
         return hash((self.from_node, self.to_node))
@@ -82,9 +81,6 @@ class Edge:
 
 class Area:
     def __init__(self, area_feature):
-        self.type = ''
-        self.risk = ConstantFunction(0)
-
         self.type = area_feature['properties']['type']
         self.risk = ConstantFunction(area_feature['properties']['risk'])
 
@@ -94,8 +90,7 @@ class Area:
         self.geometry = Polygon(projected_coords)
 
     def __str__(self):
-        str = "Area type=%s, risk=%s" % (self.type, self.risk.__str__())
-        return str
+        return "Area type=%s, risk=%s" % (self.type, self.risk.__str__())
 
 
 class Graph:
@@ -171,7 +166,8 @@ class Graph:
             all_edges.extend(self.get_out_edges(f))
         return all_edges
 
-    def __assert_risk(self, areas, edges, nodes):
+    @staticmethod
+    def __assert_risk(areas, edges, nodes):
         for a in areas:
             print("In area of " + a.type + " with risk " + a.risk.__str__())
 

@@ -38,7 +38,7 @@ def output_to_pddl(graph, path="problem.pddl"):
     pddl_string += "(:init\n"
 
     pddl_string += "(= (road_cost) 0)(mode from)(to-mode to)(from-mode from)(available virtual)(last-agent virtual)"
-    pddl_string += "\n (first-agent %s)" % all_agents[0]
+    pddl_string += "\n(first-agent %s)" % all_agents[0]
 
     pddl_string += "\n"
 
@@ -54,7 +54,7 @@ def output_to_pddl(graph, path="problem.pddl"):
         else:
             second = all_agents[i + 1]
 
-        pddl_string += "\n (next-agent %s %s)" % (first, second)
+        pddl_string += "\n(next-agent %s %s)" % (first, second)
 
     pddl_string += "\n"
 
@@ -68,6 +68,22 @@ def output_to_pddl(graph, path="problem.pddl"):
         if not isinstance(i.risk, ConstantFunction):
             raise ValueError("Non-constant risk in the edge " + i)
         pddl_string += "(= (road_risk %s-%s) %d)\n" % (i.from_node, i.to_node, i.risk.get_risk(0))
+        if isinstance(i.capacity, ConstantFunction):
+            pddl_string += "(= (capacity-0 %s-%s) 99999)(= (crowding-0 %s-%s) 1)\n" % (i.from_node, i.to_node, i.from_node, i.to_node)
+        elif isinstance(i.capacity, CapacityFunction):
+            if len(i.capacity.capacity) > 10:
+                raise ValueError('Capacity function can have max 10 levels')
+
+            counter = 0
+            last_k = 0
+            last_v = 0
+            for k, v in i.capacity.capacity.items():
+                pddl_string += "(= (capacity-%d %s-%s) %d)(= (crowding-%d %s-%s) %d)\n" % (counter, i.from_node, i.to_node, k, counter, i.from_node, i.to_node, v)
+                counter += 1
+                last_k = k
+                last_v = v
+            for counter2 in range(counter, 10):
+                pddl_string += "(= (capacity-%d %s-%s) %d)(= (crowding-%d %s-%s) %d)\n" % (counter2, i.from_node, i.to_node, last_k, counter2, i.from_node, i.to_node, last_v)
 
     for i in all_nodes:
         n = graph.get_node(i)
