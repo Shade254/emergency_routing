@@ -368,19 +368,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "1192418188"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.898793,
-          57.0371035
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "1192418190"
       },
       "geometry": {
@@ -2097,32 +2084,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "4586148790"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.8989976,
-          57.0363451
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "4586148791"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.8996337,
-          57.0362847
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "5545093394"
       },
       "geometry": {
@@ -2149,32 +2110,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "5545093396"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.8985998,
-          57.0370495
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "5545093397"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.8987286,
-          57.0370721
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "8519702891"
       },
       "geometry": {
@@ -2188,20 +2123,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "8975240828"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          9.899563,
-          57.0362914
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "1610052188",
+        "from": "1192418171",
         "to": "1610052188"
       },
       "geometry": {
@@ -2221,7 +2143,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418182",
+        "from": "1610052188",
         "to": "1192418182"
       },
       "geometry": {
@@ -2241,7 +2163,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "3110698004",
+        "from": "1192418182",
         "to": "3110698004"
       },
       "geometry": {
@@ -2261,7 +2183,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418219",
+        "from": "3110698004",
         "to": "1192418219"
       },
       "geometry": {
@@ -2281,7 +2203,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418169",
+        "from": "1192418219",
         "to": "1192418169"
       },
       "geometry": {
@@ -2301,7 +2223,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "3110697969",
+        "from": "1192418169",
         "to": "3110697969"
       },
       "geometry": {
@@ -2321,7 +2243,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610052113",
+        "from": "3110697969",
         "to": "1610052113"
       },
       "geometry": {
@@ -2341,7 +2263,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418191",
+        "from": "1610052113",
         "to": "1192418191"
       },
       "geometry": {
@@ -2361,7 +2283,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418228",
+        "from": "1192418191",
         "to": "1192418228"
       },
       "geometry": {
@@ -2381,7 +2303,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418132",
+        "from": "1192418228",
         "to": "1192418132"
       },
       "geometry": {
@@ -2401,7 +2323,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418167",
+        "from": "1192418132",
         "to": "1192418167"
       },
       "geometry": {
@@ -2421,7 +2343,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "2894081938",
+        "from": "1192418167",
         "to": "2894081938"
       },
       "geometry": {
@@ -2441,7 +2363,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418218",
+        "from": "2894081938",
         "to": "1192418218"
       },
       "geometry": {
@@ -2461,7 +2383,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "2894081933",
+        "from": "1192418218",
         "to": "2894081933"
       },
       "geometry": {
@@ -2481,7 +2403,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418172",
+        "from": "2894081933",
         "to": "1192418172"
       },
       "geometry": {
@@ -2501,7 +2423,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "2894081934",
+        "from": "1192418172",
         "to": "2894081934"
       },
       "geometry": {
@@ -2521,7 +2443,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418175",
+        "from": "2894081934",
         "to": "1192418175"
       },
       "geometry": {
@@ -2541,7 +2463,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "2894081935",
+        "from": "1192418175",
         "to": "2894081935"
       },
       "geometry": {
@@ -2561,7 +2483,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "2894081936",
+        "from": "2894081935",
         "to": "2894081936"
       },
       "geometry": {
@@ -2581,7 +2503,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418213",
+        "from": "2894081936",
         "to": "1192418213"
       },
       "geometry": {
@@ -2601,7 +2523,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "2894081937",
+        "from": "1192418213",
         "to": "2894081937"
       },
       "geometry": {
@@ -2621,7 +2543,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418168",
+        "from": "2894081937",
         "to": "1192418168"
       },
       "geometry": {
@@ -2641,7 +2563,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418195",
+        "from": "1192418168",
         "to": "1192418195"
       },
       "geometry": {
@@ -2661,7 +2583,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418203",
+        "from": "1192418195",
         "to": "1192418203"
       },
       "geometry": {
@@ -2681,7 +2603,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418134",
+        "from": "1192418203",
         "to": "1192418134"
       },
       "geometry": {
@@ -2701,7 +2623,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418185",
+        "from": "1192418134",
         "to": "1192418185"
       },
       "geometry": {
@@ -2721,7 +2643,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "4471878222",
+        "from": "1192418185",
         "to": "4471878222"
       },
       "geometry": {
@@ -2741,7 +2663,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "4471878223",
+        "from": "4471878222",
         "to": "4471878223"
       },
       "geometry": {
@@ -2761,7 +2683,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418220",
+        "from": "4471878223",
         "to": "1192418220"
       },
       "geometry": {
@@ -2781,7 +2703,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418230",
+        "from": "1192418220",
         "to": "1192418230"
       },
       "geometry": {
@@ -2801,7 +2723,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418161",
+        "from": "1192418230",
         "to": "1192418161"
       },
       "geometry": {
@@ -2821,7 +2743,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712739",
+        "from": "1192418161",
         "to": "1409712739"
       },
       "geometry": {
@@ -2841,7 +2763,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418209",
+        "from": "1409712739",
         "to": "1192418209"
       },
       "geometry": {
@@ -2861,7 +2783,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418141",
+        "from": "1192418209",
         "to": "1192418141"
       },
       "geometry": {
@@ -2881,7 +2803,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418149",
+        "from": "1192418141",
         "to": "1192418149"
       },
       "geometry": {
@@ -2901,7 +2823,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712466",
+        "from": "1192418149",
         "to": "1409712466"
       },
       "geometry": {
@@ -2921,7 +2843,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418174",
+        "from": "1409712466",
         "to": "1192418174"
       },
       "geometry": {
@@ -2941,7 +2863,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418196",
+        "from": "1192418174",
         "to": "1192418196"
       },
       "geometry": {
@@ -2961,7 +2883,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418152",
+        "from": "1192418196",
         "to": "1192418152"
       },
       "geometry": {
@@ -2981,7 +2903,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418203",
+        "from": "1192418152",
         "to": "1192418203"
       },
       "geometry": {
@@ -3001,7 +2923,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418205",
+        "from": "1192418196",
         "to": "1192418205"
       },
       "geometry": {
@@ -3021,7 +2943,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418215",
+        "from": "1192418205",
         "to": "1192418215"
       },
       "geometry": {
@@ -3041,7 +2963,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418137",
+        "from": "1192418215",
         "to": "1192418137"
       },
       "geometry": {
@@ -3061,7 +2983,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418186",
+        "from": "1192418137",
         "to": "1192418186"
       },
       "geometry": {
@@ -3081,7 +3003,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418222",
+        "from": "1192418186",
         "to": "1192418222"
       },
       "geometry": {
@@ -3101,7 +3023,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418231",
+        "from": "1192418222",
         "to": "1192418231"
       },
       "geometry": {
@@ -3121,7 +3043,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418162",
+        "from": "1192418231",
         "to": "1192418162"
       },
       "geometry": {
@@ -3141,7 +3063,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418165",
+        "from": "1192418168",
         "to": "1192418165"
       },
       "geometry": {
@@ -3161,7 +3083,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418143",
+        "from": "1192418215",
         "to": "1192418143"
       },
       "geometry": {
@@ -3181,7 +3103,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418151",
+        "from": "1192418143",
         "to": "1192418151"
       },
       "geometry": {
@@ -3201,7 +3123,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418176",
+        "from": "1192418151",
         "to": "1192418176"
       },
       "geometry": {
@@ -3221,7 +3143,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000652",
+        "from": "1192418176",
         "to": "1610000652"
       },
       "geometry": {
@@ -3241,7 +3163,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000504",
+        "from": "1610000652",
         "to": "1610000504"
       },
       "geometry": {
@@ -3261,7 +3183,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000441",
+        "from": "1610000504",
         "to": "1610000441"
       },
       "geometry": {
@@ -3281,7 +3203,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000523",
+        "from": "1610000441",
         "to": "1610000523"
       },
       "geometry": {
@@ -3301,7 +3223,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000825",
+        "from": "1610000523",
         "to": "1610000825"
       },
       "geometry": {
@@ -3321,7 +3243,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "5545093395",
+        "from": "1610000825",
         "to": "5545093395"
       },
       "geometry": {
@@ -3341,87 +3263,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418188",
-        "to": "1192418188"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.8991778,
-            57.036994
-          ],
-          [
-            9.898793,
-            57.0371035
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "5545093397",
-        "to": "5545093397"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.898793,
-            57.0371035
-          ],
-          [
-            9.8987286,
-            57.0370721
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "5545093396",
-        "to": "5545093396"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.8987286,
-            57.0370721
-          ],
-          [
-            9.8985998,
-            57.0370495
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "1192418163",
-        "to": "1192418163"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.8985998,
-            57.0370495
-          ],
-          [
-            9.8984872,
-            57.0370721
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "1610000765",
+        "from": "1192418143",
         "to": "1610000765"
       },
       "geometry": {
@@ -3441,7 +3283,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000818",
+        "from": "1610000765",
         "to": "1610000818"
       },
       "geometry": {
@@ -3461,7 +3303,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000501",
+        "from": "1610000818",
         "to": "1610000501"
       },
       "geometry": {
@@ -3481,7 +3323,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418183",
+        "from": "1610000501",
         "to": "1192418183"
       },
       "geometry": {
@@ -3501,7 +3343,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "3110697821",
+        "from": "1192418183",
         "to": "3110697821"
       },
       "geometry": {
@@ -3521,7 +3363,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418165",
+        "from": "3110697821",
         "to": "1192418165"
       },
       "geometry": {
@@ -3541,7 +3383,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418190",
+        "from": "1192418165",
         "to": "1192418190"
       },
       "geometry": {
@@ -3561,7 +3403,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418198",
+        "from": "1192418190",
         "to": "1192418198"
       },
       "geometry": {
@@ -3581,7 +3423,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418131",
+        "from": "1192418198",
         "to": "1192418131"
       },
       "geometry": {
@@ -3601,7 +3443,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418178",
+        "from": "1192418131",
         "to": "1192418178"
       },
       "geometry": {
@@ -3621,7 +3463,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610077499",
+        "from": "1192418178",
         "to": "1610077499"
       },
       "geometry": {
@@ -3641,7 +3483,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418217",
+        "from": "1610077499",
         "to": "1192418217"
       },
       "geometry": {
@@ -3661,7 +3503,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418226",
+        "from": "1192418217",
         "to": "1192418226"
       },
       "geometry": {
@@ -3681,7 +3523,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "3110697961",
+        "from": "1192418226",
         "to": "3110697961"
       },
       "geometry": {
@@ -3701,7 +3543,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418154",
+        "from": "3110697961",
         "to": "1192418154"
       },
       "geometry": {
@@ -3721,7 +3563,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "3110697968",
+        "from": "1192418154",
         "to": "3110697968"
       },
       "geometry": {
@@ -3741,7 +3583,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418206",
+        "from": "3110697968",
         "to": "1192418206"
       },
       "geometry": {
@@ -3761,7 +3603,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1201435338",
+        "from": "1192418185",
         "to": "1201435338"
       },
       "geometry": {
@@ -3781,7 +3623,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "4471878224",
+        "from": "1201435338",
         "to": "4471878224"
       },
       "geometry": {
@@ -3801,7 +3643,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1201435342",
+        "from": "4471878224",
         "to": "1201435342"
       },
       "geometry": {
@@ -3821,7 +3663,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1201435329",
+        "from": "1201435342",
         "to": "1201435329"
       },
       "geometry": {
@@ -3841,7 +3683,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1201435334",
+        "from": "1201435329",
         "to": "1201435334"
       },
       "geometry": {
@@ -3861,7 +3703,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418172",
+        "from": "1201435334",
         "to": "1192418172"
       },
       "geometry": {
@@ -3881,7 +3723,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712446",
+        "from": "1409712466",
         "to": "1409712446"
       },
       "geometry": {
@@ -3901,7 +3743,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712418",
+        "from": "1409712446",
         "to": "1409712418"
       },
       "geometry": {
@@ -3921,7 +3763,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712391",
+        "from": "1409712418",
         "to": "1409712391"
       },
       "geometry": {
@@ -3941,7 +3783,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712363",
+        "from": "1409712391",
         "to": "1409712363"
       },
       "geometry": {
@@ -3961,7 +3803,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712353",
+        "from": "1409712363",
         "to": "1409712353"
       },
       "geometry": {
@@ -3981,7 +3823,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712348",
+        "from": "1409712353",
         "to": "1409712348"
       },
       "geometry": {
@@ -4001,7 +3843,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712360",
+        "from": "1409712348",
         "to": "1409712360"
       },
       "geometry": {
@@ -4021,7 +3863,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712384",
+        "from": "1409712360",
         "to": "1409712384"
       },
       "geometry": {
@@ -4041,7 +3883,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712406",
+        "from": "1409712384",
         "to": "1409712406"
       },
       "geometry": {
@@ -4061,7 +3903,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712411",
+        "from": "1409712406",
         "to": "1409712411"
       },
       "geometry": {
@@ -4081,7 +3923,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712393",
+        "from": "1409712411",
         "to": "1409712393"
       },
       "geometry": {
@@ -4101,7 +3943,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712388",
+        "from": "1409712393",
         "to": "1409712388"
       },
       "geometry": {
@@ -4121,7 +3963,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712413",
+        "from": "1409712388",
         "to": "1409712413"
       },
       "geometry": {
@@ -4141,7 +3983,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418174",
+        "from": "1409712413",
         "to": "1192418174"
       },
       "geometry": {
@@ -4161,7 +4003,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712764",
+        "from": "1409712741",
         "to": "1409712764"
       },
       "geometry": {
@@ -4181,7 +4023,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712769",
+        "from": "1409712764",
         "to": "1409712769"
       },
       "geometry": {
@@ -4201,7 +4043,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712779",
+        "from": "1409712769",
         "to": "1409712779"
       },
       "geometry": {
@@ -4221,7 +4063,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712783",
+        "from": "1409712779",
         "to": "1409712783"
       },
       "geometry": {
@@ -4241,7 +4083,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712796",
+        "from": "1409712783",
         "to": "1409712796"
       },
       "geometry": {
@@ -4261,7 +4103,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712798",
+        "from": "1409712796",
         "to": "1409712798"
       },
       "geometry": {
@@ -4281,7 +4123,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712794",
+        "from": "1409712798",
         "to": "1409712794"
       },
       "geometry": {
@@ -4301,7 +4143,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712784",
+        "from": "1409712794",
         "to": "1409712784"
       },
       "geometry": {
@@ -4321,7 +4163,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712776",
+        "from": "1409712784",
         "to": "1409712776"
       },
       "geometry": {
@@ -4341,7 +4183,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712689",
+        "from": "1409712638",
         "to": "1409712689"
       },
       "geometry": {
@@ -4361,7 +4203,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712697",
+        "from": "1409712689",
         "to": "1409712697"
       },
       "geometry": {
@@ -4381,7 +4223,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712707",
+        "from": "1409712697",
         "to": "1409712707"
       },
       "geometry": {
@@ -4401,7 +4243,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712709",
+        "from": "1409712707",
         "to": "1409712709"
       },
       "geometry": {
@@ -4421,7 +4263,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712686",
+        "from": "1409712709",
         "to": "1409712686"
       },
       "geometry": {
@@ -4441,7 +4283,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712642",
+        "from": "1409712686",
         "to": "1409712642"
       },
       "geometry": {
@@ -4461,7 +4303,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712609",
+        "from": "1409712642",
         "to": "1409712609"
       },
       "geometry": {
@@ -4481,7 +4323,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712574",
+        "from": "1409712609",
         "to": "1409712574"
       },
       "geometry": {
@@ -4501,7 +4343,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712562",
+        "from": "1409712574",
         "to": "1409712562"
       },
       "geometry": {
@@ -4521,7 +4363,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712526",
+        "from": "1409712562",
         "to": "1409712526"
       },
       "geometry": {
@@ -4541,7 +4383,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712502",
+        "from": "1409712526",
         "to": "1409712502"
       },
       "geometry": {
@@ -4561,7 +4403,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712536",
+        "from": "1409712502",
         "to": "1409712536"
       },
       "geometry": {
@@ -4581,7 +4423,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712521",
+        "from": "1409712536",
         "to": "1409712521"
       },
       "geometry": {
@@ -4601,7 +4443,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712829",
+        "from": "1409712776",
         "to": "1409712829"
       },
       "geometry": {
@@ -4621,7 +4463,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712834",
+        "from": "1409712829",
         "to": "1409712834"
       },
       "geometry": {
@@ -4641,7 +4483,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712847",
+        "from": "1409712834",
         "to": "1409712847"
       },
       "geometry": {
@@ -4661,7 +4503,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712848",
+        "from": "1409712847",
         "to": "1409712848"
       },
       "geometry": {
@@ -4681,7 +4523,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712842",
+        "from": "1409712848",
         "to": "1409712842"
       },
       "geometry": {
@@ -4701,7 +4543,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712807",
+        "from": "1409712842",
         "to": "1409712807"
       },
       "geometry": {
@@ -4721,7 +4563,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712736",
+        "from": "1409712807",
         "to": "1409712736"
       },
       "geometry": {
@@ -4741,7 +4583,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712711",
+        "from": "1409712736",
         "to": "1409712711"
       },
       "geometry": {
@@ -4761,7 +4603,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712670",
+        "from": "1409712711",
         "to": "1409712670"
       },
       "geometry": {
@@ -4781,7 +4623,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712668",
+        "from": "1409712670",
         "to": "1409712668"
       },
       "geometry": {
@@ -4801,7 +4643,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712744",
+        "from": "1409712710",
         "to": "1409712744"
       },
       "geometry": {
@@ -4821,7 +4663,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712751",
+        "from": "1409712744",
         "to": "1409712751"
       },
       "geometry": {
@@ -4841,7 +4683,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712766",
+        "from": "1409712751",
         "to": "1409712766"
       },
       "geometry": {
@@ -4861,7 +4703,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712767",
+        "from": "1409712766",
         "to": "1409712767"
       },
       "geometry": {
@@ -4881,7 +4723,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712772",
+        "from": "1409712767",
         "to": "1409712772"
       },
       "geometry": {
@@ -4901,7 +4743,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1409712776",
+        "from": "1409712772",
         "to": "1409712776"
       },
       "geometry": {
@@ -4921,7 +4763,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000499",
+        "from": "1610000505",
         "to": "1610000499"
       },
       "geometry": {
@@ -4941,7 +4783,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000706",
+        "from": "1610000499",
         "to": "1610000706"
       },
       "geometry": {
@@ -4961,7 +4803,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000524",
+        "from": "1610000706",
         "to": "1610000524"
       },
       "geometry": {
@@ -4981,7 +4823,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000534",
+        "from": "1610000524",
         "to": "1610000534"
       },
       "geometry": {
@@ -5001,7 +4843,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610000679",
+        "from": "1610000534",
         "to": "1610000679"
       },
       "geometry": {
@@ -5021,7 +4863,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418141",
+        "from": "1610000679",
         "to": "1192418141"
       },
       "geometry": {
@@ -5041,7 +4883,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "2894081930",
+        "from": "1192418213",
         "to": "2894081930"
       },
       "geometry": {
@@ -5061,7 +4903,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "2894081932",
+        "from": "2894081930",
         "to": "2894081932"
       },
       "geometry": {
@@ -5081,7 +4923,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418163",
+        "from": "2894081932",
         "to": "1192418163"
       },
       "geometry": {
@@ -5101,7 +4943,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610052108",
+        "from": "1192418163",
         "to": "1610052108"
       },
       "geometry": {
@@ -5121,7 +4963,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610052246",
+        "from": "1610052108",
         "to": "1610052246"
       },
       "geometry": {
@@ -5141,7 +4983,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610077433",
+        "from": "1610052246",
         "to": "1610077433"
       },
       "geometry": {
@@ -5161,7 +5003,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418139",
+        "from": "1610077433",
         "to": "1192418139"
       },
       "geometry": {
@@ -5181,7 +5023,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610052080",
+        "from": "1610052113",
         "to": "1610052080"
       },
       "geometry": {
@@ -5201,7 +5043,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610052157",
+        "from": "1610052080",
         "to": "1610052157"
       },
       "geometry": {
@@ -5221,7 +5063,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610051877",
+        "from": "1610052157",
         "to": "1610051877"
       },
       "geometry": {
@@ -5241,7 +5083,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610052246",
+        "from": "1610051877",
         "to": "1610052246"
       },
       "geometry": {
@@ -5261,7 +5103,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610051924",
+        "from": "1610051881",
         "to": "1610051924"
       },
       "geometry": {
@@ -5281,7 +5123,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610052025",
+        "from": "1610051924",
         "to": "1610052025"
       },
       "geometry": {
@@ -5301,7 +5143,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1610052287",
+        "from": "1610052025",
         "to": "1610052287"
       },
       "geometry": {
@@ -5321,7 +5163,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1192418132",
+        "from": "1610052287",
         "to": "1192418132"
       },
       "geometry": {
@@ -5341,7 +5183,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1809096426",
+        "from": "1809096437",
         "to": "1809096426"
       },
       "geometry": {
@@ -5361,7 +5203,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1809096421",
+        "from": "1809096426",
         "to": "1809096421"
       },
       "geometry": {
@@ -5381,7 +5223,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1809096422",
+        "from": "1809096421",
         "to": "1809096422"
       },
       "geometry": {
@@ -5401,7 +5243,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1809096429",
+        "from": "1809096422",
         "to": "1809096429"
       },
       "geometry": {
@@ -5421,7 +5263,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1809096445",
+        "from": "1809096429",
         "to": "1809096445"
       },
       "geometry": {
@@ -5441,7 +5283,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1809096453",
+        "from": "1809096445",
         "to": "1809096453"
       },
       "geometry": {
@@ -5461,7 +5303,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1809096454",
+        "from": "1809096453",
         "to": "1809096454"
       },
       "geometry": {
@@ -5481,7 +5323,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1809096451",
+        "from": "1809096454",
         "to": "1809096451"
       },
       "geometry": {
@@ -5501,7 +5343,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "1809096450",
+        "from": "1809096451",
         "to": "1809096450"
       },
       "geometry": {
@@ -5521,67 +5363,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "8975240828",
-        "to": "8975240828"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.8996337,
-            57.0362847
-          ],
-          [
-            9.899563,
-            57.0362914
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "4586148790",
-        "to": "4586148790"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.899563,
-            57.0362914
-          ],
-          [
-            9.8989976,
-            57.0363451
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "3110697821",
-        "to": "3110697821"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            9.8989976,
-            57.0363451
-          ],
-          [
-            9.8987846,
-            57.0363745
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "from": "5545093394",
+        "from": "8519702891",
         "to": "5545093394"
       },
       "geometry": {
@@ -5601,7 +5383,7 @@
     {
       "type": "Feature",
       "properties": {
-        "from": "8519702891",
+        "from": "5545093395",
         "to": "8519702891"
       },
       "geometry": {
