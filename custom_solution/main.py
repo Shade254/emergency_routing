@@ -1,9 +1,30 @@
-from os import pardir
-from sys import path
 from cost_functions import *
 from graph import *
 from search_algs import *
 from collisions import *
+
+
+def add_bound_to_path(simple_path, collisions):
+    path = simple_path.get_path()
+    upper_bound = 0
+    for j in range(len(path) - 1):
+        active_collisions = []
+        for c in collisions:
+            if c.edge.from_node == path[j] and c.edge.to_node == path[j + 1] and c.when == j:
+                active_collisions.append(c)
+
+        edge = graph.get_edge(path[j], path[j + 1])
+        if not active_collisions:
+            upper_bound += EdgeCostFunction.get_risk(simple_path.people, edge)
+        else:
+            active_people = simple_path.people
+            for c in active_collisions:
+                active_people += c.people - simple_path.people
+
+            upper_bound += EdgeCostFunction.get_risk(active_people, edge)
+
+    return BoundedPath(simple_path, upper_bound)
+
 
 if __name__ == "__main__":
     graph_path = '../test_cases/aalborg_storcenter.json'
@@ -18,37 +39,17 @@ if __name__ == "__main__":
         print(p)
 
     # find collisions between shortest paths
-    collisions = identify_all_collisions(shortest_paths, graph)
-    collisions = merge_collision(collisions)
+    all_collisions = identify_all_collisions(shortest_paths, graph)
 
     # create all possible constraints for one of the collisions
-    constraints_for_first_collision = collisions[0].get_all_constraints()
+    constraints_for_first_collision = all_collisions[0].get_all_constraints()
 
     print("--------------")
 
-
     bounded_paths = []
-    
-    for i in shortest_paths: 
-        path = i.get_path()
-        upper_bound = 0
-        for j in range(len(path)-1):
-            for c in collisions:
-                if c.edge.from_node == path[j] and c.edge.to_node == path[j + 1]: 
-                    upper_bound += EdgeCostFunction.get_risk(c.people, c.edge)
-                else: 
-                    edge = graph.get_edge(path[j], path[j + 1])
-                    upper_bound += EdgeCostFunction.get_risk(i.people, edge)
 
-        
-        bounded_paths.append(BoundedPath(i, upper_bound))
+    for i in shortest_paths:
+        bounded_paths.append(add_bound_to_path(i, all_collisions))
 
-    for i in bounded_paths: 
+    for i in bounded_paths:
         print(i)
-
-    
-        
-    
-
-
-        #print("....................")
