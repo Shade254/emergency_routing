@@ -47,4 +47,9 @@ class BoundedPath(SimplePath):
         self.upper_bound = upper_bound
         self._cost = path.get_cost()
         self.people = path.get_people()
-        self._path = path
+        self._path = path.get_path()
+        self._timing = path.get_timing()
+
+    def __str__(self):
+        return "PATH: %s, COST: %d-%d" % (self._path, self._cost, self.upper_bound)
+

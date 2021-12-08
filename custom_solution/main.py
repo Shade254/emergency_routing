@@ -38,14 +38,17 @@ if __name__ == "__main__":
                     upper_bound += EdgeCostFunction.get_risk(c.people, c.edge)
                 else: 
                     edge = graph.get_edge(path[j], path[j + 1])
-                    upper_bound += EdgeCostFunction.get_risk(path.people, edge)
+                    upper_bound += EdgeCostFunction.get_risk(i.people, edge)
 
         
-        bounded_paths.append(BoundedPath(path, upper_bound))
+        bounded_paths.append(BoundedPath(i, upper_bound))
+
+    for i in bounded_paths: 
+        print(i)
 
     
         
-        
+    
 
 
         #print("....................")
