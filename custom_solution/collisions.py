@@ -68,6 +68,9 @@ class Collision:
         self.when = when
         self.paths = {path1, path2}
         self.constraints = []
+        self.people = self.sum_of_people()
+        
+
 
     def can_merge(self, collision):
         return self.edge == collision.edge and self.when == collision.when
@@ -75,6 +78,7 @@ class Collision:
     def merge(self, collision):
         if self.can_merge(collision):
             self.paths = self.paths.union(collision.paths)
+            self.people = self.sum_of_people()
 
     def get_constraint(self, path_index):
         counter = 0
@@ -92,6 +96,12 @@ class Collision:
         for i in range(len(self.paths)):
             constraints.append(self.get_constraint(i))
         return constraints
+    
+    def sum_of_people(self): 
+        p=0
+        for i in self.paths: 
+            p += i.get_people()
+        return p
 
     def __str__(self):
         return "Collision at edge %s at time %d number of paths %d" % (self.edge, self.when, len(self.paths))

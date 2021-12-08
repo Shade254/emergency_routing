@@ -40,3 +40,16 @@ class SimplePath(Path):
 
     def __hash__(self):
         return hash((self._cost, tuple(self._timing), tuple(self._path)))
+
+class BoundedPath(SimplePath):
+    def __init__(self, path, upper_bound):
+        # set everything as in simple path
+        self.upper_bound = upper_bound
+        self._cost = path.get_cost()
+        self.people = path.get_people()
+        self._path = path.get_path()
+        self._timing = path.get_timing()
+
+    def __str__(self):
+        return "PATH: %s, COST: %d-%d" % (self._path, self._cost, self.upper_bound)
+

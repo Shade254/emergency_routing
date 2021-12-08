@@ -895,7 +895,11 @@
          "type": "Feature",
          "properties": {
             "from": "crossroad_16",
-            "to": "exit_c"
+            "to": "exit_c",
+            "capacity": {
+               "2": 0,
+               "100": 50
+            }
          },
          "geometry": {
             "type": "LineString",
