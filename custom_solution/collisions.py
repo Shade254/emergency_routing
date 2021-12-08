@@ -44,7 +44,8 @@ def identify_all_collisions(shortest_paths, graph):
                     if path1[x] == path2[x] and timing1[x] == timing2[x]:
                         if x != min(len(path1), len(path2)) - 1:
                             if path1[x + 1] == path2[x + 1]:
-                                collisions.append(Collision(shortest_paths[i], shortest_paths[j], graph.get_edge(path1[x], path1[x + 1]), timing1[x]))
+                                collisions.append(Collision(shortest_paths[i], shortest_paths[j],
+                                                            graph.get_edge(path1[x], path1[x + 1]), timing1[x]))
 
     return collisions
 
@@ -57,9 +58,17 @@ class Constraint:
 
     def return_people(self):
         return self.people
-    
+
     def __str__(self):
-        return "%s at %d with %d people"%(self.edge, self.when, self.people)
+        return "%s at %d with %d people" % (self.edge, self.when, self.people)
+
+
+class NegativeConstraint(Constraint):
+    pass
+
+
+class PositiveConstraint(Constraint):
+    pass
 
 
 class Collision:

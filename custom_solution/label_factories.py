@@ -1,3 +1,4 @@
+from custom_solution.collisions import NegativeConstraint
 from labels import *
 
 
@@ -23,7 +24,8 @@ class CostLabelFactory(LabelFactory):
         for e in self._graph.get_out_edges(label.get_node_id()):
             edge_cost = self._cost_function.get_risk(label.get_people(), e)
             if edge_cost:
-                new_label = CostLabel(label, e.to_node, label.get_people(), label.get_travel_time() + e.travel_time, cost + edge_cost)
+                new_label = CostLabel(label, e.to_node, label.get_people(), label.get_travel_time() + e.travel_time,
+                                      cost + edge_cost)
                 children.append(new_label)
         return children
 
@@ -34,35 +36,49 @@ class CostLabelFactory(LabelFactory):
 class ConstrainedCostLabelFactory(CostLabelFactory):
     def __init__(self, graph, cost_function, constraints):
         super().__init__(graph, cost_function)
-        self.constraints = {}
+        self.negative_constraints = {}
+        self.positive_constraints = {}
         for c in constraints:
-            if c.when not in self.constraints:
-                self.constraints[c.when] = []
-            self.constraints[c.when].append(c)
+            if isinstance(c, NegativeConstraint):
+                if c.when not in self.negative_constraints:
+                    self.negative_constraints[c.when] = []
+                self.negative_constraints[c.when].append(c)
+            else:
+                if c.when not in self.positive_constraints:
+                    self.positive_constraints[c.when] = []
+                self.positive_constraints[c.when].append(c)
 
     def expand(self, label):
         cost = label.get_cost()
         children = []
         time = label.get_travel_time()
-        constraints = []
 
-        if time in self.constraints:
-            constraints = self.constraints[time]
+        negative_constraints = []
+        positive_constraints = []
+        if time in self.negative_constraints:
+            negative_constraints = self.negative_constraints[time]
+        elif time in self.negative_constraints:
+            positive_constraints = self.positive_constraints[time]
 
         for e in self._graph.get_out_edges(label.get_node_id()):
-            add = True 
-            for c in constraints:
+            add = True
+            for c in negative_constraints:
                 if c.edge == e:
                     add = False
                     break
-            
-            if not add: 
-                print("Applied constrained " + str(label) + "  --  " +str(e))
+            for c in positive_constraints:
+                if c.edge != e:
+                    add = False
+                    break
+
+            if not add:
+                print("Negative Applied constrained " + str(label) + "  --  " + str(e))
                 continue
 
             edge_cost = self._cost_function.get_risk(label.get_people(), e)
             if edge_cost:
-                new_label = CostLabel(label, e.to_node, label.get_people(), label.get_travel_time() + e.travel_time, cost + edge_cost)
+                new_label = CostLabel(label, e.to_node, label.get_people(), label.get_travel_time() + e.travel_time,
+                                      cost + edge_cost)
                 children.append(new_label)
         return children
 
@@ -79,10 +95,12 @@ class HeuristicCostLabelFactory(CostLabelFactory):
             next_node = self._graph.get_node(e.to_node)
             edge_cost = self._cost_function.get_risk(label.get_people(), e)
             if edge_cost:
-                new_label = HeuristicCostLabel(label, next_node.name, label.get_people(), label.get_travel_time() + e.travel_time, cost + edge_cost,
+                new_label = HeuristicCostLabel(label, next_node.name, label.get_people(),
+                                               label.get_travel_time() + e.travel_time, cost + edge_cost,
                                                self._heuristic.get_estimate(next_node))
                 children.append(new_label)
         return children
 
     def get_start_labels(self, node_id, people):
-        return [HeuristicCostLabel(None, node_id, people, 0, 0, self._heuristic.get_estimate(self._graph.get_node(node_id)))]
+        return [HeuristicCostLabel(None, node_id, people, 0, 0,
+                                   self._heuristic.get_estimate(self._graph.get_node(node_id)))]
