@@ -72,7 +72,7 @@ def xml_to_json(filename):
     for nodeChild in originalNode:
         coor = []
         if nodeChild.tag == 'node':
-            singlearray = {"type": "Feature", "properties": {"name": nodeChild.attrib['id']},
+            singlearray = {"type"    : "Feature", "properties": {"name": nodeChild.attrib['id']},
                            "geometry": {"type": "Point", "coordinates": [float(nodeChild.attrib['lon']),
                                                                          float(nodeChild.attrib['lat'])]}}
             list.append(singlearray)
@@ -84,9 +84,9 @@ def xml_to_json(filename):
                     fm = ndChild.attrib['id']
                 if i % 2 == 0:
                     t = ndChild.attrib['id']
-                    single = {"type": 'Feature', "properties": {"from": fm, "to": t},
-                          "geometry": {"type": "LineString",
-                                       "coordinates": coor}}
+                    single = {"type"    : 'Feature', "properties": {"from": fm, "to": t},
+                              "geometry": {"type"       : "LineString",
+                                           "coordinates": coor}}
                     list2.append(single)
                     coor = []
                 i = i + 1
@@ -95,5 +95,6 @@ def xml_to_json(filename):
     with open("map.json", 'w') as f:
         f.write(json.dumps(building, indent=4))
     return
+
 
 xml_to_json(extract_xml('zoo.osm'))
