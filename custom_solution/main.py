@@ -1,7 +1,52 @@
+import copy
+
 from cost_functions import *
 from graph import *
 from search_algs import *
 from collisions import *
+
+
+def choose_collision(collisions):
+    return collisions[0]
+
+
+def search(replan_from, replan_people, paths, constraints, graph):
+    if replan_from and replan_people:
+        # replan specific path if chosen by parent node
+        new_alg = ConstrainedExitDijkstra(replan_from, replan_people, graph, EdgeCostFunction(), constraints)
+        new_paths = new_alg.search()
+        # fail if replanning not possible
+        if not new_paths:
+            print("No replanning possible for " + constraints)
+            return None
+        paths.append(new_paths[0])
+
+    # detect collisions between all paths
+    collisions = identify_all_collisions(paths, graph)
+
+    # return set of paths as result if no collisions detected
+    if not collisions:
+        return paths
+
+    # choose specific collision to solve (in child nodes)
+    to_solve = choose_collision(collisions)
+
+    for i in range(len(to_solve.paths)):
+        # for every path participating in the collision get a constraint
+        replan = to_solve.paths[i]
+        new_constraint = to_solve.get_constraint(i)
+
+        # get all the other paths
+        other_paths = copy.deepcopy(paths)
+        other_paths.remove(replan)
+
+        # get all the previous constraints and add a new one
+        all_constraints = copy.deepcopy(constraints)
+        all_constraints.append(new_constraint)
+
+        # run recursive search with path to replan and all the constraints
+        search(replan.get_path()[0], replan.get_people(), other_paths, constraints, graph)
+
 
 if __name__ == "__main__":
     graph_path = '../test_cases/aalborg_storcenter/aalborg_storcenter.json'
