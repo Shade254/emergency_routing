@@ -27,8 +27,9 @@ def add_bound_to_path(simple_path, collisions):
 
 
 if __name__ == "__main__":
-    graph_path = '../test_cases/aalborg_storcenter.json'
-    graph = Graph(graph_path)
+    graph_path = '../test_cases/aalborg_storcenter/aalborg_storcenter.json'
+    data_path = '../test_cases/aalborg_storcenter/aalborg_storcenter.csv'
+    graph = Graph(graph_path, data_path)
 
     # get all shortest paths
     alg = BulkSearchAlgorithm(graph.get_nodes_with_people(), graph, EdgeCostFunction())

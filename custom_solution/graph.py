@@ -94,7 +94,7 @@ class Area:
 
 
 class Graph:
-    def __init__(self, path_to_graph):
+    def __init__(self, path_to_graph, path_to_data=None):
         self.num_of_edges = 0
         self.__node_map = {}
         self.__edge_map = {}
@@ -124,9 +124,23 @@ class Graph:
             print("Loaded %d nodes, %d edges and %d areas" % (len(self.__node_map), self.num_of_edges, len(self.area_list)))
             print("Propagating risk from areas to nodes and edges")
             self.__assert_risk(self.area_list, self.__edge_map, self.__node_map)
-            for node_id in self.__node_map: 
+            for node_id in self.__node_map:
                 self.__edge_map[node_id][node_id] = Edge(node_id, node_id, ConstantFunction(0), self.__node_map[node_id].risk, 1, self.__node_map[node_id].geometry)
-       
+
+        if path_to_data:
+            print("Loading data from file " + path_to_data)
+            with open(path_to_data, 'r') as f:
+                lines = f.readlines()
+                first = True
+                for line in lines:
+                    if first:
+                        first = False
+                        continue
+
+                    splitted = line.split(",")
+                    if len(splitted) == 3 and splitted[0] in self.__node_map:
+                        self.__node_map[splitted[0]].people = int(splitted[1])
+                        self.__node_map[splitted[0]].is_exit = splitted[2] == "True"
 
     def __add_edge_to_graph(self, from_id, to_id, edge):
         if from_id not in self.__edge_map:

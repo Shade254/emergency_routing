@@ -18,10 +18,7 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "center",
-            "people": {
-               "normal": 5
-            }
+            "name": "center"
          },
          "geometry": {
             "type": "Point",
@@ -35,7 +32,7 @@
          "type": "Feature",
          "properties": {
             "name": "exit_a",
-            "is_exit": "true"
+            "is_exit": true
          },
          "geometry": {
             "type": "Point",
@@ -61,11 +58,7 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "crossroad_2",
-            "people": {
-               "normal": 2,
-               "disabled": 1
-            }
+            "name": "crossroad_2"
          },
          "geometry": {
             "type": "Point",
@@ -78,11 +71,7 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "bog_and_ide",
-            "people": {
-               "normal": 2,
-               "disabled": 1
-            }
+            "name": "bog_and_ide"
          },
          "geometry": {
             "type": "Point",
@@ -108,10 +97,7 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "crossroad_4",
-            "people": {
-               "normal": 1
-            }
+            "name": "crossroad_4"
          },
          "geometry": {
             "type": "Point",
@@ -202,8 +188,7 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "crossroad_14",
-            "people": {"normal": 1}
+            "name": "crossroad_14"
          },
          "geometry": {
             "type": "Point",
@@ -256,7 +241,7 @@
          "type": "Feature",
          "properties": {
             "name": "exit_c",
-            "is_exit": "true"
+            "is_exit": true
          },
          "geometry": {
             "type": "Point",
@@ -269,8 +254,7 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "nails_gallery",
-            "people": {"normal": 1}
+            "name": "nails_gallery"
          },
          "geometry": {
             "type": "Point",
@@ -283,8 +267,7 @@
       {
          "type": "Feature",
          "properties": {
-            "name": "bella_donna",
-            "people": {"normal": 1}
+            "name": "bella_donna"
          },
          "geometry": {
             "type": "Point",
@@ -896,6 +879,7 @@
          "properties": {
             "from": "crossroad_16",
             "to": "exit_c",
+            "is_exit": true,
             "capacity": {
                "2": 0,
                "100": 50
