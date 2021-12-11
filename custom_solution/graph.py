@@ -10,6 +10,7 @@ class Node:
         self.is_exit = False
         self.risk = ConstantFunction(1)
         self.people = 0
+        self.geojson = node_feature['geometry']
         self.geometry = Point(transform(node_feature['geometry']['coordinates'][1], node_feature['geometry']['coordinates'][0], 2197))
         self.name = node_feature['properties']['name']
 
@@ -34,13 +35,14 @@ class Node:
 
 
 class Edge:
-    def __init__(self, from_id, to_id, capacity, risk, travel_time, geometry):
+    def __init__(self, from_id, to_id, capacity, risk, travel_time, geometry, geojson):
         self.from_node = from_id
         self.to_node = to_id
         self.capacity = capacity
         self.risk = risk
         self.travel_time = travel_time
         self.geometry = geometry
+        self.geojson = geojson
         self.oneway = False
 
     @staticmethod
@@ -58,6 +60,7 @@ class Edge:
             projected_coordinates.append(transform(a[1], a[0], 2197))
 
         geometry = LineString(projected_coordinates)
+        geojson = edge_feature['geometry']
 
         if 'capacity' in edge_feature['properties']:
             capacity = CapacityFunction(edge_feature['properties']['capacity'])
@@ -67,10 +70,10 @@ class Edge:
 
         from_node = edge_feature['properties']['from']
         to_node = edge_feature['properties']['to']
-        return Edge(from_node, to_node, capacity, risk, travel_time, geometry)
+        return Edge(from_node, to_node, capacity, risk, travel_time, geometry, geojson)
 
     def create_opposite(self):
-        return Edge(self.to_node, self.from_node, self.capacity, self.risk, self.travel_time, self.geometry)
+        return Edge(self.to_node, self.from_node, self.capacity, self.risk, self.travel_time, self.geometry, self.geojson)
 
     def __str__(self):
         return "Edge %s->%s, capacity=%s, risk=%s, travel_time=%d" % (self.from_node, self.to_node, self.capacity.__str__(), self.risk.__str__(), self.travel_time)
@@ -88,6 +91,7 @@ class Area:
         for c in area_feature["geometry"]["coordinates"][0]:
             projected_coords.append(transform(c[1], c[0], 2197))
         self.geometry = Polygon(projected_coords)
+        self.geojson = area_feature['geometry']
 
     def __str__(self):
         return "Area type=%s, risk=%s" % (self.type, self.risk.__str__())
@@ -125,7 +129,8 @@ class Graph:
             print("Propagating risk from areas to nodes and edges")
             self.__assert_risk(self.area_list, self.__edge_map, self.__node_map)
             for node_id in self.__node_map:
-                self.__edge_map[node_id][node_id] = Edge(node_id, node_id, ConstantFunction(0), self.__node_map[node_id].risk, 1, self.__node_map[node_id].geometry)
+                self.__edge_map[node_id][node_id] = Edge(node_id, node_id, ConstantFunction(0), self.__node_map[node_id].risk, 1, self.__node_map[node_id].geometry,
+                                                         self.__node_map[node_id].geojson)
 
         if path_to_data:
             print("Loading data from file " + path_to_data)

@@ -1,9 +1,27 @@
+import json
+
+
 class Path:
     def __init__(self, end_label):
         self._reconstruct_path(end_label)
 
     def _reconstruct_path(self, label):
         pass
+
+    @staticmethod
+    def output_geojson(path, people, graph, file):
+        features = []
+        with open(file, "w") as f:
+            for i in range(len(path) - 1):
+                edge = graph.get_edge(path[i], path[i + 1])
+                if edge:
+                    feature = {"type": "Feature", "properties": {"from": path[i], "to": path[i + 1], "people": people}, "geometry": edge.geojson}
+                    features.append(feature)
+                else:
+                    raise ValueError("Non existant edge %s-%s in a path" % (path[i], path[i + 1]))
+
+            collection = {"type": "FeatureCollection", "features": features}
+            f.write(json.dumps(collection))
 
 
 class SimplePath(Path):
@@ -23,7 +41,7 @@ class SimplePath(Path):
     def get_timing(self):
         return self._timing
 
-    def get_people(self): 
+    def get_people(self):
         return self.people
 
     def get_path(self):
@@ -41,6 +59,7 @@ class SimplePath(Path):
     def __hash__(self):
         return hash((self._cost, tuple(self._timing), tuple(self._path)))
 
+
 class BoundedPath(SimplePath):
     def __init__(self, path, upper_bound):
         # set everything as in simple path
@@ -52,4 +71,3 @@ class BoundedPath(SimplePath):
 
     def __str__(self):
         return "PATH: %s, COST: %d-%d" % (self._path, self._cost, self.upper_bound)
-

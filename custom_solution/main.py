@@ -54,3 +54,4 @@ if __name__ == "__main__":
 
     for i in bounded_paths:
         print(i)
+        i.output_geojson(i.get_path(), i.get_people(), graph, "%s_%d.json" % (i.get_path()[0], i.get_people()))
