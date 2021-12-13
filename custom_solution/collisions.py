@@ -1,5 +1,3 @@
-from enum import Enum
-
 from custom_solution.cost_functions import EdgeCostFunction
 from custom_solution.paths import BoundedPath
 
@@ -54,11 +52,6 @@ def identify_all_collisions(shortest_paths, graph):
                                                             graph.get_edge(path1[x], path1[x + 1]), timing1[x]))
 
     return collisions
-
-
-class Type(Enum):
-    POSITIVE = "POSITIVE"
-    NEGATIVE = "NEGATIVE"
 
 
 class Constraint:

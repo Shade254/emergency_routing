@@ -62,7 +62,6 @@ class SimplePath(Path):
 
 class BoundedPath(SimplePath):
     def __init__(self, path, upper_bound):
-        # set everything as in simple path
         self.upper_bound = upper_bound
         self._cost = path.get_cost()
         self.people = path.get_people()
