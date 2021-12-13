@@ -834,7 +834,11 @@
          "type": "Feature",
          "properties": {
             "from": "crossroad_15",
-            "to": "crossroad_16"
+            "to": "crossroad_16",
+            "capacity": {
+               "2": 0,
+               "100": 50
+            }
          },
          "geometry": {
             "type": "LineString",
@@ -879,11 +883,7 @@
          "properties": {
             "from": "crossroad_16",
             "to": "exit_c",
-            "is_exit": true,
-            "capacity": {
-               "2": 0,
-               "100": 50
-            }
+            "is_exit": true
          },
          "geometry": {
             "type": "LineString",

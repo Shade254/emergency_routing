@@ -1,30 +1,36 @@
-from numpy import where
+from enum import Enum
+
+from custom_solution.cost_functions import EdgeCostFunction
+from custom_solution.paths import BoundedPath
 
 
-def merge_collision(collisions):
-    merged_collisions = []
-    for i in range(len(collisions)):
-        current_collision = collisions[i]
-        collisions_to_merge = []
+def add_bound_to_path(graph, simple_path, collisions):
+    path = simple_path.get_path()
+    upper_bound = 0
+    for j in range(len(path) - 1):
+        active_collisions = []
+        for c in collisions:
+            if c.edge.from_node == path[j] and c.edge.to_node == path[j + 1] and c.when == j:
+                active_collisions.append(c)
 
-        already_merged = False
-        for m in merged_collisions:
-            if m.can_merge(current_collision):
-                already_merged = True
+        edge = graph.get_edge(path[j], path[j + 1])
+        if not active_collisions:
+            upper_bound += EdgeCostFunction.get_risk(simple_path.people, edge)
+        else:
+            active_people = simple_path.people
+            for c in active_collisions:
+                active_people += c.people - simple_path.people
 
-        if already_merged:
-            continue
+            upper_bound += EdgeCostFunction.get_risk(active_people, edge)
 
-        for j in range(i, len(collisions)):
-            if i != j:
-                if collisions[i].can_merge(collisions[j]):
-                    collisions_to_merge.append(collisions[j])
+    return BoundedPath(simple_path, upper_bound)
 
-        for c in collisions_to_merge:
-            current_collision.merge(c)
 
-        merged_collisions.append(current_collision)
-    return merged_collisions
+def get_bounded_paths(graph, paths, collisions):
+    bounded_paths = []
+    for i in paths:
+        bounded_paths.append(add_bound_to_path(graph, i, collisions))
+    return bounded_paths
 
 
 # added graph input to get it to run
@@ -44,9 +50,15 @@ def identify_all_collisions(shortest_paths, graph):
                     if path1[x] == path2[x] and timing1[x] == timing2[x]:
                         if x != min(len(path1), len(path2)) - 1:
                             if path1[x + 1] == path2[x + 1]:
-                                collisions.append(Collision(shortest_paths[i], shortest_paths[j], graph.get_edge(path1[x], path1[x + 1]), timing1[x]))
+                                collisions.append(Collision(shortest_paths[i], shortest_paths[j],
+                                                            graph.get_edge(path1[x], path1[x + 1]), timing1[x]))
 
     return collisions
+
+
+class Type(Enum):
+    POSITIVE = "POSITIVE"
+    NEGATIVE = "NEGATIVE"
 
 
 class Constraint:
@@ -57,51 +69,52 @@ class Constraint:
 
     def return_people(self):
         return self.people
-    
+
+
+class NegativeConstraint(Constraint):
+    def __init__(self, edge, when, people):
+        super().__init__(edge, when, people)
+        self.positive = False
+
     def __str__(self):
-        return "%s at %d with %d people"%(self.edge, self.when, self.people)
+        return "%r %s at %d with %d people" % (self.positive, self.edge, self.when, self.people)
+
+
+class PositiveConstraint(Constraint):
+    def __init__(self, edge, when, people):
+        super().__init__(edge, when, people)
+        self.positive = True
+
+    def __str__(self):
+        return "%r %s at %d with %d people" % (self.positive, self.edge, self.when, self.people)
 
 
 class Collision:
     def __init__(self, path1, path2, edge, when):
         self.edge = edge
         self.when = when
-        self.paths = {path1, path2}
-        self.constraints = []
-        self.people = self.sum_of_people()
-        
+        self.path1 = path1
+        self.path2 = path2
+        self.people = path1.get_people() + path2.get_people()
 
+    def get_participants(self):
+        return [self.path1, self.path2]
 
-    def can_merge(self, collision):
-        return self.edge == collision.edge and self.when == collision.when
+    def get_negative_constraint(self, path):
+        if path == self.path1:
+            return NegativeConstraint(self.edge, self.when, self.people - self.path1.get_people())
+        elif path == self.path2:
+            return NegativeConstraint(self.edge, self.when, self.people - self.path2.get_people())
+        else:
+            raise ValueError("Not part of this Collision")
 
-    def merge(self, collision):
-        if self.can_merge(collision):
-            self.paths = self.paths.union(collision.paths)
-            self.people = self.sum_of_people()
-
-    def get_constraint(self, path_index):
-        counter = 0
-        sum_of_people = 0
-
-        for i in self.paths:
-            if counter != path_index:
-                sum_of_people += i.get_people()
-            counter += 1
-
-        return Constraint(self.edge, self.when, sum_of_people)
-
-    def get_all_constraints(self):
-        constraints = []
-        for i in range(len(self.paths)):
-            constraints.append(self.get_constraint(i))
-        return constraints
-    
-    def sum_of_people(self): 
-        p=0
-        for i in self.paths: 
-            p += i.get_people()
-        return p
+    def get_positive_constraints(self, path):
+        if path == self.path1:
+            return PositiveConstraint(self.edge, self.when, self.people - self.path1.get_people())
+        elif path == self.path2:
+            return PositiveConstraint(self.edge, self.when, self.people - self.path2.get_people())
+        else:
+            raise ValueError("Not part of this Collision")
 
     def __str__(self):
-        return "Collision at edge %s at time %d number of paths %d" % (self.edge, self.when, len(self.paths))
+        return "Collision at edge %s at time %d number of people %d (from %s and %s)" % (self.edge, self.when, self.people, self.path1.get_path()[0], self.path2.get_path()[0])

@@ -35,18 +35,15 @@ class SearchAlgorithm:
         end_labels = []
         while not self._queue.empty():
             priority, current_label = self._queue.get()
-            print("Picked " + current_label.__str__())
 
             if self.__goal_checker.is_goal(current_label):
-                print("Is goal")
                 end_labels.append(current_label)
 
             if self.__goal_checker.finish_search():
-                print("Search finished")
                 break
 
             children = self.__label_factory.expand(current_label)
-            # print("Number of children: %d" % len(children))
+
             for label in children:
                 self._add_to_queue(label)
             self._closed_set.append(current_label.get_node_id())
@@ -132,15 +129,15 @@ class ExitDijkstra(ExitSearchAlg, Dijkstra):
     def __init__(self, start_node_name, people, graph, cost_function):
         super().__init__(start_node_name, people, graph, cost_function)
 
+
 # constrained Dijkstra algorithm with every exit as a goal
 class ConstrainedExitDijkstra(ExitSearchAlg, Dijkstra):
     def __init__(self, start_node_name, people, graph, cost_function, constraints):
         self.constraints = constraints
         super().__init__(start_node_name, people, graph, cost_function)
-    
+
     def _create_label_factory(self, graph, cost_function):
         return ConstrainedCostLabelFactory(graph, cost_function, self.constraints)
-
 
 
 # AStar algorithm with every exit as a goal

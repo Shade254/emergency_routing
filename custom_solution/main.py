@@ -3,29 +3,6 @@ from graph import *
 from search_algs import *
 from collisions import *
 
-
-def add_bound_to_path(simple_path, collisions):
-    path = simple_path.get_path()
-    upper_bound = 0
-    for j in range(len(path) - 1):
-        active_collisions = []
-        for c in collisions:
-            if c.edge.from_node == path[j] and c.edge.to_node == path[j + 1] and c.when == j:
-                active_collisions.append(c)
-
-        edge = graph.get_edge(path[j], path[j + 1])
-        if not active_collisions:
-            upper_bound += EdgeCostFunction.get_risk(simple_path.people, edge)
-        else:
-            active_people = simple_path.people
-            for c in active_collisions:
-                active_people += c.people - simple_path.people
-
-            upper_bound += EdgeCostFunction.get_risk(active_people, edge)
-
-    return BoundedPath(simple_path, upper_bound)
-
-
 if __name__ == "__main__":
     graph_path = '../test_cases/aalborg_storcenter/aalborg_storcenter.json'
     data_path = '../test_cases/aalborg_storcenter/aalborg_storcenter.csv'
@@ -42,16 +19,27 @@ if __name__ == "__main__":
     # find collisions between shortest paths
     all_collisions = identify_all_collisions(shortest_paths, graph)
 
-    # create all possible constraints for one of the collisions
-    constraints_for_first_collision = all_collisions[0].get_all_constraints()
-
-    print("--------------")
-
-    bounded_paths = []
-
-    for i in shortest_paths:
-        bounded_paths.append(add_bound_to_path(i, all_collisions))
+    bounded_paths = get_bounded_paths(graph, shortest_paths, all_collisions)
 
     for i in bounded_paths:
         print(i)
-        i.output_geojson(i.get_path(), i.get_people(), graph, "%s_%d.json" % (i.get_path()[0], i.get_people()))
+        i.output_geojson(i.get_path(), i.get_people(), graph, "%s_%d_0.json" % (i.get_path()[0], i.get_people()))
+
+    picked_collision = all_collisions[0]
+
+    print("Picked: %s" % picked_collision)
+
+    for path in picked_collision.get_participants():
+        constraint = picked_collision.get_negative_constraint(path)
+        alg = ConstrainedExitDijkstra(path.get_path()[0], path.get_people(), graph, EdgeCostFunction(), [constraint])
+        i = alg.search()[0]
+        print(i)
+        i.output_geojson(i.get_path(), i.get_people(), graph, "%s_%d_1.json" % (i.get_path()[0], i.get_people()))
+
+    for path in picked_collision.get_participants():
+        constraint = picked_collision.get_positive_constraints(path)
+        print(constraint)
+        alg = ConstrainedExitDijkstra(path.get_path()[0], path.get_people(), graph, EdgeCostFunction(), [constraint])
+        i = alg.search()[0]
+        print(i)
+        i.output_geojson(i.get_path(), i.get_people(), graph, "%s_%d_2.json" % (i.get_path()[0], i.get_people()))
