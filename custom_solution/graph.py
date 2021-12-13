@@ -1,6 +1,8 @@
+import copy
 import json
 from risk_functions import *
-from shapely.geometry import Point, Polygon, LineString
+from shapely.geometry import Point, Polygon, LineString, MultiLineString
+from shapely import ops
 from utils import transform
 
 
@@ -12,7 +14,10 @@ class Node:
         self.people = 0
         self.geojson = node_feature['geometry']
         self.geometry = Point(transform(node_feature['geometry']['coordinates'][1], node_feature['geometry']['coordinates'][0], 2197))
-        self.name = node_feature['properties']['name']
+        if 'name' not in node_feature['properties']:
+            self.name = hash(self.geojson.__str__()) % 100000
+        else:
+            self.name = node_feature['properties']['name']
 
         if 'is_exit' in node_feature['properties'] and node_feature['properties']['is_exit']:
             self.is_exit = True
@@ -71,6 +76,51 @@ class Edge:
         from_node = edge_feature['properties']['from']
         to_node = edge_feature['properties']['to']
         return Edge(from_node, to_node, capacity, risk, travel_time, geometry, geojson)
+
+    @staticmethod
+    def merge_two_edges(from_id, to_id, edge1, edge2):
+        new_risk = edge1.risk
+        if edge1.risk != edge2.risk:
+            if edge1.risk.get_risk(0) < edge2.risk.get_risk(0):
+                new_risk = edge2.risk
+
+        if not isinstance(edge1.capacity, ConstantFunction) and not isinstance(edge2.capacity, ConstantFunction):
+            raise ValueError("Cannot raise two non-trivial capacity functions")
+
+        new_capacity = edge1.capacity
+        if not isinstance(edge2.capacity, ConstantFunction):
+            new_capacity = edge2.capacity
+
+        new_geometry = MultiLineString([edge1.geometry, edge2.geometry])
+        new_geometry = ops.linemerge(new_geometry)
+
+        new_geojson = {
+            "type"       : "LineString",
+            "coordinates": []
+            }
+
+        for c in edge1.geojson['coordinates']:
+            new_geojson['coordinates'].append(c)
+
+        second = edge2.geojson['coordinates']
+
+        if second[0] == new_geojson['coordinates'][-1]:
+            second = second[1:]
+        elif second[-1] == new_geojson['coordinates'][-1]:
+            second = second[:-1]
+            second.reverse()
+        elif second[0] == new_geojson['coordinates'][0]:
+            second = second[1:]
+            new_geojson['coordinates'].reverse()
+        else:
+            second = second[:-1]
+            second.reverse()
+            new_geojson['coordinates'].reverse()
+
+        for c in second:
+            new_geojson['coordinates'].append(c)
+
+        return Edge(from_id, to_id, new_capacity, new_risk, 1, new_geometry, new_geojson)
 
     def create_opposite(self):
         return Edge(self.to_node, self.from_node, self.capacity, self.risk, self.travel_time, self.geometry, self.geojson)
@@ -147,6 +197,98 @@ class Graph:
                         self.__node_map[splitted[0]].people = int(splitted[1])
                         self.__node_map[splitted[0]].is_exit = splitted[2] == "True"
 
+    def contract_nodes(self):
+        nodes_to_contract = []
+        for n in self.__node_map:
+            if self.__node_map[n].is_exit:
+                continue
+            out_edges = [x for x in self.__edge_map[n].keys()]
+            out_edges.remove(n)
+            in_edges = []
+            for n1 in self.__node_map:
+                if n1 != n and n in self.__edge_map[n1]:
+                    in_edges.append(n1)
+
+            out_edges.sort()
+            in_edges.sort()
+
+            # transit node
+            if out_edges == in_edges and len(out_edges) == 2:
+                nodes_to_contract.append(n)
+
+        print("Removing %d nodes" % len(nodes_to_contract))
+        for n in nodes_to_contract:
+            print("Removing transit node " + n)
+            out = [x.to_node for x in self.get_out_edges(n)]
+            out.remove(n)
+
+            new_from = out[0]
+            new_to = out[1]
+
+            if self.get_edge(new_from, new_to):
+                continue
+
+            new_edge = Edge.merge_two_edges(new_from, new_to, self.__edge_map[new_from][n], self.__edge_map[n][new_to])
+            opposite_edge = new_edge.create_opposite()
+
+            self.remove_edge(n, n)
+            self.remove_edge(new_from, n)
+            self.remove_edge(n, new_from)
+            self.remove_edge(new_to, n)
+            self.remove_edge(n, new_to)
+            self.remove_node(n)
+            self.__add_edge_to_graph(new_from, new_to, new_edge)
+            self.__add_edge_to_graph(new_to, new_from, opposite_edge)
+            self.num_of_edges -= 3
+
+    def output_geojson(self, file="graph.json"):
+        with open(file, "w") as opened_file:
+            features = []
+
+            for n, node in self.__node_map.items():
+                if not node:
+                    continue
+
+                f = {
+                    "type"      : "Feature",
+                    "properties": {
+                        "name": n,
+                        },
+                    "geometry"  : node.geojson
+                    }
+                features.append(f)
+            closed_set = []
+            for e in self.get_all_edges():
+                if not e or e.from_node == e.to_node or (e.from_node, e.to_node) in closed_set:
+                    continue
+
+                f = {
+                    "type"      : "Feature",
+                    "properties": {
+                        "from": e.from_node,
+                        "to"  : e.to_node
+                        },
+                    "geometry"  : e.geojson
+                    }
+                features.append(f)
+                closed_set.append((e.from_node, e.to_node))
+                closed_set.append((e.to_node, e.from_node))
+            for a in self.area_list:
+                f = {
+                    "type"      : "Feature",
+                    "properties": {
+                        "type": a.type,
+                        "risk": a.risk.get_risk(0)
+                        },
+                    "geometry"  : a.geojson
+                    }
+                features.append(f)
+
+            collection = {
+                "type"    : "FeatureCollection",
+                "features": features}
+            opened_file.write(json.dumps(collection))
+
     def __add_edge_to_graph(self, from_id, to_id, edge):
         if from_id not in self.__edge_map:
             self.__edge_map[from_id] = {}
@@ -159,6 +301,18 @@ class Graph:
     def get_all_nodes(self):
         return self.__node_map.keys()
 
+    def remove_edge(self, from_id, to_id):
+        if from_id in self.__edge_map and to_id in self.__edge_map[from_id]:
+            self.__edge_map[from_id].pop(to_id)
+            return True
+        return False
+
+    def remove_node(self, node_id):
+        if node_id in self.__node_map:
+            self.__node_map.pop(node_id)
+            return True
+        return False
+
     def get_nodes_with_people(self):
         node_people_dict = {}
         for n in self.get_all_nodes():
@@ -167,10 +321,10 @@ class Graph:
                 node_people_dict[n] = node.people
         return node_people_dict
 
-    def get_node(self, id):
-        if id not in self.__node_map:
+    def get_node(self, node_id):
+        if node_id not in self.__node_map:
             return None
-        return self.__node_map[id]
+        return self.__node_map[node_id]
 
     def get_edge(self, from_id, to_id):
         if from_id in self.__edge_map and to_id in self.__edge_map[from_id]:

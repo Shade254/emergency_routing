@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
             for n in nodes:
                 remove_properties(n)
-                if "name" in n["properties"] and "crossroad" in n["properties"]["name"]:
+                if "name" in n["properties"] and "crossroad" in str(n["properties"]["name"]):
                     max_index = max(max_index, int(n["properties"]["name"].split("_")[-1]))
                 elif "name" not in n["properties"]:
                     max_index += 1
