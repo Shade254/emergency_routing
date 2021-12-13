@@ -1,4 +1,3 @@
-from custom_solution.collisions import NegativeConstraint
 from labels import *
 
 
@@ -39,7 +38,7 @@ class ConstrainedCostLabelFactory(CostLabelFactory):
         self.negative_constraints = {}
         self.positive_constraints = {}
         for c in constraints:
-            if isinstance(c, NegativeConstraint):
+            if not c.positive:
                 if c.when not in self.negative_constraints:
                     self.negative_constraints[c.when] = []
                 self.negative_constraints[c.when].append(c)
@@ -57,25 +56,29 @@ class ConstrainedCostLabelFactory(CostLabelFactory):
         positive_constraints = []
         if time in self.negative_constraints:
             negative_constraints = self.negative_constraints[time]
-        elif time in self.negative_constraints:
+        elif time in self.positive_constraints:
             positive_constraints = self.positive_constraints[time]
 
         for e in self._graph.get_out_edges(label.get_node_id()):
             add = True
+            added_people = 0
             for c in negative_constraints:
                 if c.edge == e:
+                    print("Applied constraint " + str(label) + "  --  " + str(e))
                     add = False
                     break
             for c in positive_constraints:
                 if c.edge != e:
+                    print("Applied constraint " + str(label) + "  --  " + str(e))
                     add = False
                     break
+                else:
+                    added_people += c.people
 
             if not add:
-                print("Negative Applied constrained " + str(label) + "  --  " + str(e))
                 continue
 
-            edge_cost = self._cost_function.get_risk(label.get_people(), e)
+            edge_cost = self._cost_function.get_risk(label.get_people() + added_people, e)
             if edge_cost:
                 new_label = CostLabel(label, e.to_node, label.get_people(), label.get_travel_time() + e.travel_time,
                                       cost + edge_cost)
