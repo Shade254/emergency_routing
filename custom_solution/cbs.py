@@ -45,7 +45,7 @@ def pick_best_result(results):
     return sorted(results, key=lambda x: x.upper_bound)[0]
 
 
-def search(replan_from, replan_people, paths, bounds, constraints, graph, solved_collisions, end_time):
+def search(replan_from, replan_people, paths, bounds, constraints, graph, solved_collisions, end_time, tolerance):
     global iteration_counter
     iteration_counter += 1
     print("\n\nIteration " + str(iteration_counter))
@@ -82,11 +82,11 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
     new_bounds = get_bounds(paths)
     print("Bounds: PASSED - " + str(bounds) + " NEW - " + str(new_bounds))
 
-    if new_bounds[0] >= bounds[1]:
+    if bounds and new_bounds[0] >= bounds[1]:
         print("Lower bound too high - RETURN NONE")
         return None
 
-    if new_bounds[0] == new_bounds[1]:
+    if (new_bounds[0] * (1 + tolerance)) >= new_bounds[1]:
         print("Bounds met - RETURN RESULT")
         return Result(iteration_counter, new_bounds[0], new_bounds[1], paths)
 
@@ -142,7 +142,7 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
         if new_replan_from not in all_constraints:
             all_constraints[new_replan_from] = []
         all_constraints[new_replan_from].append(negative_constraint)
-        result = search(new_replan_from, new_replan_people, other_paths, pass_bounds, all_constraints, graph, new_solved_collisions, end_time)
+        result = search(new_replan_from, new_replan_people, other_paths, pass_bounds, all_constraints, graph, new_solved_collisions, end_time, tolerance)
 
         if pass_bounds and result:
             pass_bounds = (pass_bounds[0], min(pass_bounds[1], result.upper_bound))
@@ -157,7 +157,7 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
             all_constraints[path.get_path()[0]].append(positive_constraint)
 
     other_paths = copy.deepcopy(paths)
-    results.append(search(None, None, other_paths, pass_bounds, all_constraints, graph, new_solved_collisions, end_time))
+    results.append(search(None, None, other_paths, pass_bounds, all_constraints, graph, new_solved_collisions, end_time, tolerance))
 
     best = pick_best_result(results)
     best.iterations = iteration_counter
