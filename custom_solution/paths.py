@@ -54,7 +54,7 @@ class SimplePath(Path):
         return "PATH: %s, COST: %d" % (self._path, self._cost)
 
     def __eq__(self, other):
-        return isinstance(other, SimplePath) and self.__hash__() == other.__hash__()
+        return isinstance(other, Path) and self.__hash__() == other.__hash__()
 
     def __hash__(self):
         return hash((self._cost, tuple(self._timing), tuple(self._path)))
@@ -62,7 +62,6 @@ class SimplePath(Path):
 
 class BoundedPath(SimplePath):
     def __init__(self, path, upper_bound):
-        # set everything as in simple path
         self.upper_bound = upper_bound
         self._cost = path.get_cost()
         self.people = path.get_people()

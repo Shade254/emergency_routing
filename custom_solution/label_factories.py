@@ -64,12 +64,10 @@ class ConstrainedCostLabelFactory(CostLabelFactory):
             added_people = 0
             for c in negative_constraints:
                 if c.edge == e:
-                    print("Applied constraint " + str(label) + "  --  " + str(e))
                     add = False
                     break
             for c in positive_constraints:
                 if c.edge != e:
-                    print("Applied constraint " + str(label) + "  --  " + str(e))
                     add = False
                     break
                 else:
