@@ -22,14 +22,13 @@ if __name__ == "__main__":
         lower_bound += p.get_cost()
 
     start_time = time.time()
-    # time_limit = None
-    time_limit = 40  # seconds
+    time_limit = None
+    # time_limit = 40  # seconds
     end_time = None
     if time_limit:
         end_time = time.time() + time_limit
 
     result = search(None, None, shortest_paths, (lower_bound, sys.maxsize), {}, graph, [], end_time)
-
 
     print("\nAlgorithm done in %d iterations and %d seconds" % (result.iterations, (time.time() - start_time)))
 

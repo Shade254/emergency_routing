@@ -73,7 +73,7 @@ class NegativeConstraint(Constraint):
         self.positive = False
 
     def __str__(self):
-        return "%r %s at %d with %d people" % (self.positive, self.edge, self.when, self.people)
+        return "%r %s->%s at %d with %d people" % (self.positive, self.edge.from_node, self.edge.to_node, self.when, self.people)
 
 
 class PositiveConstraint(Constraint):
@@ -82,7 +82,7 @@ class PositiveConstraint(Constraint):
         self.positive = True
 
     def __str__(self):
-        return "%r %s at %d with %d people" % (self.positive, self.edge, self.when, self.people)
+        return "%r %s->%s at %d with %d people" % (self.positive, self.edge.from_node, self.edge.to_node, self.when, self.people)
 
 
 class Collision:
@@ -113,10 +113,11 @@ class Collision:
             raise ValueError("Not part of this Collision")
 
     def __eq__(self, other):
-        return isinstance(other, Collision) and self.__hash__() == other.__hash__()
+        return self.__hash__() == other.__hash__()
 
     def __hash__(self):
-        return hash((self.edge, self.when, self.people, self.path1.get_path()[0], self.path2.get_path()[0]))
+        return hash((self.edge, self.when, self.people, tuple(sorted([self.path1.get_path()[0], self.path2.get_path()[0]]))))
 
     def __str__(self):
-        return "Collision at edge %s->%s at time %d number of people %d (from %s and %s)" % (self.edge.from_node, self.edge.to_node, self.when, self.people, self.path1.get_path()[0], self.path2.get_path()[0])
+        return "Collision at edge %s->%s at time %d number of people %d (from %s and %s)" % (
+            self.edge.from_node, self.edge.to_node, self.when, self.people, self.path1.get_path()[0], self.path2.get_path()[0])

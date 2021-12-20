@@ -56,7 +56,8 @@ class ConstrainedCostLabelFactory(CostLabelFactory):
         positive_constraints = []
         if time in self.negative_constraints:
             negative_constraints = self.negative_constraints[time]
-        elif time in self.positive_constraints:
+
+        if time in self.positive_constraints:
             positive_constraints = self.positive_constraints[time]
 
         for e in self._graph.get_out_edges(label.get_node_id()):

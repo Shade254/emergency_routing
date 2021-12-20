@@ -46,7 +46,6 @@ def pick_best_result(results):
 
 
 def search(replan_from, replan_people, paths, bounds, constraints, graph, solved_collisions, end_time):
-
     global iteration_counter
     iteration_counter += 1
     print("\n\nIteration " + str(iteration_counter))
@@ -74,13 +73,15 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
 
     paths2 = []
     for p in paths:
-        #print(p.get_path())
-        #p.output_geojson(p.get_path(), p.get_people(), graph, "it-%d-%s-%d.json" % (global_counter, p.get_path()[0], p.get_people()))
+        # print(p.get_path())
+        # p.output_geojson(p.get_path(), p.get_people(), graph, "it-%d-%s-%d.json" % (global_counter, p.get_path()[0], p.get_people()))
         paths2.append(add_bound_to_path(graph, p, collisions))
 
     paths = paths2
 
     new_bounds = get_bounds(paths)
+    print("Bounds: PASSED - " + str(bounds) + " NEW - " + str(new_bounds))
+
     if new_bounds[0] >= bounds[1]:
         print("Lower bound too high - RETURN NONE")
         return None
@@ -89,7 +90,7 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
         print("Bounds met - RETURN RESULT")
         return Result(iteration_counter, new_bounds[0], new_bounds[1], paths)
 
-    if time.time() >= end_time:
+    if end_time and time.time() >= end_time:
         print("Time exceeded")
         return Result(iteration_counter, new_bounds[0], new_bounds[1], paths)
 
@@ -109,7 +110,6 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
         print("No (unsolved) collisions - RETURN RESULT")
         return Result(iteration_counter, new_bounds[0], new_bounds[1], paths)
 
-
     # choose specific collision to solve (in child nodes)
     to_solve = choose_collision(collisions2)
 
@@ -119,6 +119,10 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
     new_solved_collisions.append(to_solve)
 
     results = []
+
+    pass_bounds = bounds
+    if pass_bounds:
+        pass_bounds = (new_bounds[0], min(new_bounds[1], bounds[1]))
 
     for path in to_solve.get_participants():
         new_replan_from = path.get_path()[0]
@@ -138,9 +142,13 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
         if new_replan_from not in all_constraints:
             all_constraints[new_replan_from] = []
         all_constraints[new_replan_from].append(negative_constraint)
+        result = search(new_replan_from, new_replan_people, other_paths, pass_bounds, all_constraints, graph, new_solved_collisions, end_time)
+
+        if pass_bounds and result:
+            pass_bounds = (pass_bounds[0], min(pass_bounds[1], result.upper_bound))
 
         # run recursive search with path to replan and all the constraints
-        results.append(search(new_replan_from, new_replan_people, other_paths, new_bounds, all_constraints, graph, new_solved_collisions, end_time))
+        results.append(result)
 
     all_constraints = copy.deepcopy(constraints)
     for path in to_solve.get_participants():
@@ -149,6 +157,8 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
             all_constraints[path.get_path()[0]].append(positive_constraint)
 
     other_paths = copy.deepcopy(paths)
-    results.append(search(None, None, other_paths, new_bounds, all_constraints, graph, new_solved_collisions, end_time))
+    results.append(search(None, None, other_paths, pass_bounds, all_constraints, graph, new_solved_collisions, end_time))
 
-    return pick_best_result(results)
+    best = pick_best_result(results)
+    best.iterations = iteration_counter
+    return best

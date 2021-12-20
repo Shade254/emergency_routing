@@ -1,8 +1,9 @@
-import copy
 import json
-from risk_functions import *
-from shapely.geometry import Point, Polygon, LineString, MultiLineString
+
 from shapely import ops
+from shapely.geometry import LineString, MultiLineString, Point, Polygon
+
+from risk_functions import *
 from utils import transform
 
 
@@ -130,6 +131,9 @@ class Edge:
 
     def __hash__(self):
         return hash((self.from_node, self.to_node))
+
+    def __eq__(self, other):
+        return self.__hash__() == other.__hash__()
 
 
 class Area:
