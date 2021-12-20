@@ -3,6 +3,9 @@ from custom_solution.paths import BoundedPath
 
 
 def add_bound_to_path(graph, simple_path, collisions):
+    if isinstance(simple_path, BoundedPath):
+        return simple_path
+
     path = simple_path.get_path()
     upper_bound = 0
     for j in range(len(path) - 1):
@@ -101,7 +104,7 @@ class Collision:
         else:
             raise ValueError("Not part of this Collision")
 
-    def get_positive_constraints(self, path):
+    def get_positive_constraint(self, path):
         if path == self.path1:
             return PositiveConstraint(self.edge, self.when, self.people - self.path1.get_people())
         elif path == self.path2:
@@ -109,5 +112,11 @@ class Collision:
         else:
             raise ValueError("Not part of this Collision")
 
+    def __eq__(self, other):
+        return isinstance(other, Collision) and self.__hash__() == other.__hash__()
+
+    def __hash__(self):
+        return hash((self.edge, self.when, self.people, self.path1.get_path()[0], self.path2.get_path()[0]))
+
     def __str__(self):
-        return "Collision at edge %s at time %d number of people %d (from %s and %s)" % (self.edge, self.when, self.people, self.path1.get_path()[0], self.path2.get_path()[0])
+        return "Collision at edge %s->%s at time %d number of people %d (from %s and %s)" % (self.edge.from_node, self.edge.to_node, self.when, self.people, self.path1.get_path()[0], self.path2.get_path()[0])

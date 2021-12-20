@@ -168,6 +168,5 @@ class BulkSearchAlgorithm:
             print("%d paths found from %s for %d people" % (len(paths), node, people))
             for p in paths:
                 print(p)
-                print("TIMING: " + p.get_timing().__str__())
             shortest_paths.extend(paths)
         return shortest_paths
