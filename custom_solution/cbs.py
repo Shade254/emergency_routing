@@ -45,6 +45,10 @@ def pick_best_result(results):
     return sorted(results, key=lambda x: x.upper_bound)[0]
 
 
+def bounds_met(bounds, tolerance):
+    return bounds[0] * (1 + tolerance) >= bounds[1]
+
+
 def search(replan_from, replan_people, paths, bounds, constraints, graph, solved_collisions, end_time, tolerance):
     global iteration_counter
     iteration_counter += 1
@@ -53,11 +57,6 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
     if replan_from and replan_people:
         # replan specific path if chosen by parent node
         print("Replanning for " + replan_from)
-        print("Constraints:")
-        for p, constrs in constraints.items():
-            print(p)
-            for c in constrs:
-                print("\t" + c.__str__())
         new_alg = ConstrainedExitDijkstra(replan_from, replan_people, graph, EdgeCostFunction(), constraints[replan_from])
         new_paths = new_alg.search()
         # fail if replanning not possible
@@ -86,7 +85,7 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
         print("Lower bound too high - RETURN NONE")
         return None
 
-    if (new_bounds[0] * (1 + tolerance)) >= new_bounds[1]:
+    if bounds_met(new_bounds, tolerance):
         print("Bounds met - RETURN RESULT")
         return Result(iteration_counter, new_bounds[0], new_bounds[1], paths)
 
@@ -149,16 +148,34 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
 
         # run recursive search with path to replan and all the constraints
         results.append(result)
+        if pass_bounds:
+            if bounds_met(pass_bounds, tolerance):
+                break
+        elif result and bounds_met((result.lower_bound, result.upper_bound), tolerance):
+            break
 
-    all_constraints = copy.deepcopy(constraints)
-    for path in to_solve.get_participants():
-        positive_constraint = to_solve.get_positive_constraint(path)
-        if path.get_path()[0] in all_constraints:
-            all_constraints[path.get_path()[0]].append(positive_constraint)
+    dive_deeper = True
+    if pass_bounds and bounds_met(pass_bounds):
+        dive_deeper = False
+    else:
+        for r in results:
+            if r and bounds_met((r.lower_bound, r.upper_bound), tolerance):
+                dive_deeper = False
 
-    other_paths = copy.deepcopy(paths)
-    results.append(search(None, None, other_paths, pass_bounds, all_constraints, graph, new_solved_collisions, end_time, tolerance))
+    if dive_deeper:
+        all_constraints = copy.deepcopy(constraints)
+        for path in to_solve.get_participants():
+            positive_constraint = to_solve.get_positive_constraint(path)
+            if path.get_path()[0] in all_constraints:
+                all_constraints[path.get_path()[0]].append(positive_constraint)
+
+        other_paths = copy.deepcopy(paths)
+        results.append(search(None, None, other_paths, pass_bounds, all_constraints, graph, new_solved_collisions, end_time, tolerance))
 
     best = pick_best_result(results)
+
+    if not best:
+        return None
+
     best.iterations = iteration_counter
     return best

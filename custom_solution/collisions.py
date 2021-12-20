@@ -1,3 +1,5 @@
+import sys
+
 from custom_solution.cost_functions import EdgeCostFunction
 from custom_solution.paths import BoundedPath
 
@@ -21,8 +23,13 @@ def add_bound_to_path(graph, simple_path, collisions):
             active_people = simple_path.people
             for c in active_collisions:
                 active_people += c.people - simple_path.people
+            cost = EdgeCostFunction.get_risk(active_people, edge)
+            if not cost:
+                cost = sys.maxsize
+            upper_bound += cost
 
-            upper_bound += EdgeCostFunction.get_risk(active_people, edge)
+    if upper_bound >= sys.maxsize:
+        upper_bound = sys.maxsize
 
     return BoundedPath(simple_path, upper_bound)
 
