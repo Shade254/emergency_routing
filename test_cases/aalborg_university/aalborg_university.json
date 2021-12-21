@@ -810,7 +810,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "1432031180"
+        "name": "1432031180",
+        "is_exit": true
       },
       "geometry": {
         "type": "Point",
@@ -914,7 +915,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "1432031191"
+        "name": "1432031191",
+        "is_exit": true
       },
       "geometry": {
         "type": "Point",
@@ -953,7 +955,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "1432031196"
+        "name": "1432031196",
+        "is_exit": true
       },
       "geometry": {
         "type": "Point",
@@ -2058,7 +2061,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "1817382671"
+        "name": "1817382671",
+        "is_exit": true
       },
       "geometry": {
         "type": "Point",
@@ -6643,6 +6647,11 @@
     {
       "type": "Feature",
       "properties": {
+        "capacity": {
+               "80": 0,
+               "100": 50,
+               "200": 100
+        },
         "from": "1200542514",
         "to": "1432031180"
       },
@@ -7299,6 +7308,11 @@
     {
       "type": "Feature",
       "properties": {
+        "capacity": {
+               "80": 0,
+               "100": 50,
+               "200": 100
+        },
         "from": "1432031190",
         "to": "1432031191"
       },
@@ -7319,6 +7333,11 @@
     {
       "type": "Feature",
       "properties": {
+        "capacity": {
+          "80": 0,
+          "100": 50,
+          "200": 100
+        },
         "from": "1432031190",
         "to": "1432031196"
       },
@@ -9435,6 +9454,11 @@
     {
       "type": "Feature",
       "properties": {
+        "capacity": {
+               "80": 0,
+               "100": 50,
+               "200": 100
+        },
         "from": "1802006535",
         "to": "1817382671"
       },
@@ -12764,6 +12788,36 @@
           [
             9.9806809,
             57.0160576
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "fire",
+        "risk": 100
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              9.9765944480896,
+              57.01774851798836
+            ],
+            [
+              9.980016946792603,
+              57.016130648963056
+            ],
+            [
+              9.97979164123535,
+              57.017695952953126
+            ],
+            [
+              9.9765944480896,
+              57.01774851798836
+            ]
           ]
         ]
       }
