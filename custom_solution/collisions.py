@@ -5,9 +5,6 @@ from custom_solution.paths import BoundedPath
 
 
 def add_bound_to_path(graph, simple_path, collisions):
-    if isinstance(simple_path, BoundedPath):
-        return simple_path
-
     path = simple_path.get_path()
     upper_bound = 0
     for j in range(len(path) - 1):

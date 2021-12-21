@@ -1,4 +1,5 @@
 import copy
+import sys
 import time
 from dataclasses import dataclass
 
@@ -34,6 +35,8 @@ def get_bounds(paths):
     for p in paths:
         upper += p.upper_bound * p.get_people()
         lower += p.get_cost() * p.get_people()
+    if upper >= sys.maxsize:
+        upper = sys.maxsize
     return lower, upper
 
 
@@ -162,13 +165,12 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
             if r and bounds_met((r.lower_bound, r.upper_bound), tolerance):
                 dive_deeper = False
 
-    if dive_deeper:
+    if dive_deeper and EdgeCostFunction.get_risk(to_solve.people, to_solve.edge):
         all_constraints = copy.deepcopy(constraints)
         for path in to_solve.get_participants():
             positive_constraint = to_solve.get_positive_constraint(path)
             if path.get_path()[0] in all_constraints:
                 all_constraints[path.get_path()[0]].append(positive_constraint)
-
         other_paths = copy.deepcopy(paths)
         results.append(search(None, None, other_paths, pass_bounds, all_constraints, graph, new_solved_collisions, end_time, tolerance))
 
