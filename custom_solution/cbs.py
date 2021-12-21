@@ -155,7 +155,7 @@ def search(replan_from, replan_people, paths, bounds, constraints, graph, solved
             break
 
     dive_deeper = True
-    if pass_bounds and bounds_met(pass_bounds):
+    if pass_bounds and bounds_met(pass_bounds, tolerance):
         dive_deeper = False
     else:
         for r in results:

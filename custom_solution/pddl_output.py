@@ -9,25 +9,27 @@ def output_to_pddl(graph, path="problem.pddl"):
     pddl_string += "(:objects\n"
 
     all_nodes = graph.get_all_nodes()
+    all_nodes_str = []
     all_edges = graph.get_all_edges()
     people_nodes = graph.get_nodes_with_people()
     all_agents = []
 
     for n in all_nodes:
-        pddl_string += n + " "
+        pddl_string += "n" + n + " "
+        all_nodes_str.append("n" + n)
 
     pddl_string += " - nodes\n"
 
     for e in all_edges:
-        pddl_string += e.from_node + "-" + e.to_node + " "
-    for n in all_nodes:
+        pddl_string += "n" + e.from_node + "-n" + e.to_node + " "
+    for n in all_nodes_str:
         pddl_string += n + "-" + n + " "
 
     pddl_string += " - edges\n"
 
     for k, v in people_nodes.items():
         for i in range(v):
-            agent = k + "_" + str(i)
+            agent = "a" + k + "_" + str(i)
             all_agents.append(agent)
             pddl_string += agent + " "
 
@@ -43,8 +45,8 @@ def output_to_pddl(graph, path="problem.pddl"):
     pddl_string += "\n"
 
     for i in all_edges:
-        pddl_string += "(= (counter %s-%s) 0)\n" % (i.from_node, i.to_node)
-    for i in all_nodes:
+        pddl_string += "(= (counter n%s-n%s) 0)\n" % (i.from_node, i.to_node)
+    for i in all_nodes_str:
         pddl_string += "(= (counter %s-%s) 0)\n" % (i, i)
 
     for i in range(len(all_agents)):
@@ -58,18 +60,18 @@ def output_to_pddl(graph, path="problem.pddl"):
 
     pddl_string += "\n"
 
-    for i in all_nodes:
+    for i in all_nodes_str:
         pddl_string += "(entry %s %s-%s)(leave %s-%s %s)\n" % (i, i, i, i, i, i)
 
     for i in all_edges:
-        pddl_string += "(entry %s %s-%s)(leave %s-%s %s)\n" % (i.from_node, i.from_node, i.to_node, i.from_node, i.to_node, i.to_node)
+        pddl_string += "(entry n%s n%s-n%s)(leave n%s-n%s n%s)\n" % (i.from_node, i.from_node, i.to_node, i.from_node, i.to_node, i.to_node)
 
     for i in all_edges:
         if not isinstance(i.risk, ConstantFunction):
             raise ValueError("Non-constant risk in the edge " + i)
-        pddl_string += "(= (road_risk %s-%s) %d)\n" % (i.from_node, i.to_node, i.risk.get_risk(0))
+        pddl_string += "(= (road_risk n%s-n%s) %d)\n" % (i.from_node, i.to_node, i.risk.get_risk(0))
         if isinstance(i.capacity, ConstantFunction):
-            pddl_string += "(= (capacity-0 %s-%s) 99999)(= (crowding-0 %s-%s) 1)\n" % (i.from_node, i.to_node, i.from_node, i.to_node)
+            pddl_string += "(= (capacity-0 n%s-n%s) 99999)(= (crowding-0 n%s-n%s) 1)\n" % (i.from_node, i.to_node, i.from_node, i.to_node)
         elif isinstance(i.capacity, CapacityFunction):
             if len(i.capacity.capacity) > 10:
                 raise ValueError('Capacity function can have max 10 levels')
@@ -78,27 +80,27 @@ def output_to_pddl(graph, path="problem.pddl"):
             last_k = 0
             last_v = 0
             for k, v in i.capacity.capacity.items():
-                pddl_string += "(= (capacity-%d %s-%s) %d)(= (crowding-%d %s-%s) %d)\n" % (counter, i.from_node, i.to_node, k, counter, i.from_node, i.to_node, v)
+                pddl_string += "(= (capacity-%d n%s-n%s) %d)(= (crowding-%d n%s-n%s) %d)\n" % (counter, i.from_node, i.to_node, k, counter, i.from_node, i.to_node, v)
                 counter += 1
                 last_k = k
                 last_v = v
             for counter2 in range(counter, 10):
-                pddl_string += "(= (capacity-%d %s-%s) %d)(= (crowding-%d %s-%s) %d)\n" % (counter2, i.from_node, i.to_node, last_k, counter2, i.from_node, i.to_node, last_v)
+                pddl_string += "(= (capacity-%d n%s-n%s) %d)(= (crowding-%d n%s-n%s) %d)\n" % (counter2, i.from_node, i.to_node, last_k, counter2, i.from_node, i.to_node, last_v)
 
     for i in all_nodes:
         n = graph.get_node(i)
         if not isinstance(n.risk, ConstantFunction):
             raise ValueError("Non-constant risk in the node " + n)
-        pddl_string += "(= (road_risk %s-%s) %d)\n" % (i, i, n.risk.get_risk(0))
+        pddl_string += "(= (road_risk n%s-n%s) %d)\n" % (i, i, n.risk.get_risk(0))
 
     for k, v in people_nodes.items():
         for i in range(v):
-            agent = k + "_" + str(i)
-            pddl_string += "(at_node %s %s)\n" % (agent, k)
+            agent = "a" + k + "_" + str(i)
+            pddl_string += "(at_node %s n%s)\n" % (agent, k)
 
     for n in all_nodes:
         if graph.get_node(n).is_exit:
-            pddl_string += "(exit %s)\n" % n
+            pddl_string += "(exit n%s)\n" % n
 
     pddl_string += ")"
 
@@ -116,7 +118,7 @@ def output_to_pddl(graph, path="problem.pddl"):
 
 
 if __name__ == "__main__":
-    input_file = None
+    input_name = None
     output_file = None
 
     argv = sys.argv[1:]
@@ -129,16 +131,19 @@ if __name__ == "__main__":
 
     for opt, arg in opts:
         if opt in ['-i']:
-            input_file = arg
+            input_name = arg
         elif opt in ['-o']:
             output_file = arg
 
-    if not input_file:
+    if not input_name:
         print("Cannot load input arguments")
         sys.exit(1)
+
+    input_file = "../test_cases/%s/%s.json" % (input_name, input_name)
+    data_file = "../test_cases/%s/%s.csv" % (input_name, input_name)
 
     if not output_file:
         output_file = input_file.split("/")[-1].split(".")[-2] + ".pddl"
 
-    graph = Graph(input_file)
+    graph = Graph(input_file, data_file)
     output_to_pddl(graph, output_file)

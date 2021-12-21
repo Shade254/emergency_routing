@@ -183,8 +183,8 @@ class Graph:
             print("Propagating risk from areas to nodes and edges")
             self.__assert_risk(self.area_list, self.__edge_map, self.__node_map)
             for node_id in self.__node_map:
-                self.__edge_map[node_id][node_id] = Edge(node_id, node_id, ConstantFunction(0), self.__node_map[node_id].risk, 1, self.__node_map[node_id].geometry,
-                                                         self.__node_map[node_id].geojson)
+                self.__add_edge_to_graph(node_id, node_id, Edge(node_id, node_id, ConstantFunction(0), self.__node_map[node_id].risk, 1, self.__node_map[node_id].geometry,
+                                                                self.__node_map[node_id].geojson))
 
         if path_to_data:
             print("Loading data from file " + path_to_data)
